@@ -4,7 +4,7 @@ image: "images/bocahex.png"
 about:
 	template: jolla
 	links
-		- icom: twitter
+		- icon: twitter
 		  text: Twitter
 		  href: https://www.twitter.com
 
