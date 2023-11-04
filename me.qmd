@@ -3,7 +3,7 @@ title: "About me"
 image: "images/bocahex.png"
 about:
   template: jolla
-  links
+  links:
     - icon: twitter
       text: Twitter
       href: https://www.twitter.com
