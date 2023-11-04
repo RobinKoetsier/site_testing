@@ -57,6 +57,7 @@ website:
         - text: "Passing"
           href: passesKKD.qmd
       - about.qmd
+      - me.qmd
       - icon: github
         href: https://github.com/
       - icon: twitter
