@@ -13,7 +13,7 @@ twitter-card:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+#knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r prep, echo=FALSE, message=FALSE, warning=FALSE}
