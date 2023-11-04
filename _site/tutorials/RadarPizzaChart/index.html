@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2021-04-27">
+<meta name="description" content="Make Percentile Pizza charts like The Atletic, mplsoccer or Football Slices!">
+
+<title>Getting Blue Fingers - Percentile Radars/Pizza’s</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-175572271-3', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  });
+});
+</script> 
+  
+
+
+<meta name="twitter:title" content="Getting Blue Fingers - Percentile Radars/Pizza’s">
+<meta name="twitter:description" content="Make Percentile Pizza charts like The Atletic, mplsoccer or Football Slices!">
+<meta name="twitter:image" content="https://www.gettingbluefingers.com/tutorials/RadarPizzaChart/img/1.png">
+<meta name="twitter:image-height" content="2100">
+<meta name="twitter:image-width" content="2100">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Percentile Radars/Pizza’s</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Getting Blue Fingers</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://open.spotify.com/show/6cSujEBBISBaUUc5POnjtx" title="Tussen de linies podcast" class="sidebar-tool px-1"><i class="bi bi-spotify"></i></a>
+    <a href="https://github.com/robinkoetsier" title="My Github" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="https://twitter.com/RobinWilhelmus" title="Personal Twitter" class="sidebar-tool px-1"><i class="bi bi-twitter"></i></a>
+    <a href="https://twitter.com/EredivisiePlots" title="Eredivisieplots Twitter" class="sidebar-tool px-1"><i class="bi bi-bar-chart-line"></i></a>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts.html" class="sidebar-item-text sidebar-link">Posts</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials.html" class="sidebar-item-text sidebar-link">Tutorials</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../stuff.html" class="sidebar-item-text sidebar-link">Other stuff I do</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Eredivisie stats</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../rank.html" class="sidebar-item-text sidebar-link">xRank</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Shots.html" class="sidebar-item-text sidebar-link">Shooting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../passes.html" class="sidebar-item-text sidebar-link">Passing</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">KKD stats</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../rankKKD.html" class="sidebar-item-text sidebar-link">xRank</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ShotsKKD.html" class="sidebar-item-text sidebar-link">Shooting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../passesKKD.html" class="sidebar-item-text sidebar-link">Passing</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../about.html" class="sidebar-item-text sidebar-link">About me</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro">Intro</a></li>
+  <li><a href="#getting-and-preparing-the-data" id="toc-getting-and-preparing-the-data" class="nav-link" data-scroll-target="#getting-and-preparing-the-data">Getting and preparing the data</a></li>
+  <li><a href="#making-the-chart" id="toc-making-the-chart" class="nav-link" data-scroll-target="#making-the-chart">Making the chart</a></li>
+  <li><a href="#some-other-well-known-styles" id="toc-some-other-well-known-styles" class="nav-link" data-scroll-target="#some-other-well-known-styles">Some other (well known) styles</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Percentile Radars/Pizza’s</h1>
+</div>
+
+<div>
+  <div class="description">
+    Make Percentile Pizza charts like The Atletic, mplsoccer or Football Slices!
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 27, 2021</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="intro" class="level3">
+<h3 class="anchored" data-anchor-id="intro">Intro</h3>
+<p>Disclaimer: rotating the axis labels was never fully supported and is broken in newer versions of tidyvers/ggplot. Remove that line if you get an error.</p>
+<p>As I really like the radars/pizza charts from football slices (RIP) and the mplsoccer package for Python, I was thinking about making them in R with the help of the <a href="https://github.com/JaseZiv/worldfootballR">worldfootballR package.</a> When some people contacted me with the question if I knew how to do it, I decided to make a tutorial for it. If you don’t know what I’m talking about, this is the radar from mplsoccer.</p>
+<p align="center">
+<a href="https://mplsoccer.readthedocs.io/en/latest/_images/sphx_glr_plot_pizza_colorful_001.png"> <img src="https://mplsoccer.readthedocs.io/en/latest/_images/sphx_glr_plot_pizza_colorful_001.png" style="width:400px"> </a>
+</p>
+<p>The Python package makes you enter te values yourself. For some leagues (Men’s Big 5 Leagues and European Competition, Major League Soccer, Women’s Super League) FBref has so called scouting reports with data from StatsBomb. These scouting reports do not only have the absolute numbers for several metrics, but also the percentiles. The worldfootballR package let’s you scrape them really easy. Let’s start by setting up our environment. If needed, install the packages first.</p>
+</section>
+<section id="getting-and-preparing-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="getting-and-preparing-the-data">Getting and preparing the data</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(worldfootballR)  <span class="co">#for scraping</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)       <span class="co">#for ggplot, dplyr and several other stuff</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)         <span class="co">#for sorting within ggplot</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)            <span class="co">#easier than paste()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I’m using the ‘Spartan’ font in all my plots, but you can use your own ofcourse. The extrafont package has a lot of nice fonts.</p>
+<p>Next we are going to pick a player in which we are interested, as long as it’s from the leagues mentioned earlier. I’m choosing Mateusz Klich, but you can pick someone else, I’m not judging you. As mentioned before, worldfootballR has a function to scrape the scouting report.</p>
+<p>Note: the function was updated to scrape the WHOLE scouting report. So selecting your rows need some more thought. Besides that, it also have a column called ‘StatsGroup’ so you can use this to colour your chart. Besides that, FBref switched to OPTA, so the names of the stats will be different!</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">fb_player_scouting_report</span>(<span class="st">"https://fbref.com/en/players/282679b4/Mateusz-Klich"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For some players you need to add</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pos_versus <span class="ot">=</span> <span class="st">"primary"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>inside the function as the player played multiple positions, like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">fb_player_scouting_report</span>(<span class="st">"https://fbref.com/en/players/282679b4/Mateusz-Klich"</span>, <span class="at">pos_versus =</span> <span class="st">"primary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Using other data
+</summary>
+<p>You can use <a href="https://fbref.com/en/players/282679b4/scout/365_euro/Mateusz-Klich-Scouting-Report">The full scouting report</a> as well. You only have to make the data frame yourself. A short example how to do this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_selected<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">player_name =</span> <span class="st">"Mateusz Klich"</span>,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Statistic =</span> <span class="fu">c</span>(<span class="st">"Pressures (Att 3rd)"</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"% of dribblers tackled"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Touches (Att 3rd)"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Carries into Final Third"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Progressive Passes Rec"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Crosses"</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Per90 =</span> <span class="fu">c</span>(<span class="fl">4.63</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="dv">16</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="fl">26.11</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="fl">2.55</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="fl">7.22</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="fl">1.32</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Percentile =</span> <span class="fu">c</span>(<span class="dv">92</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                                        <span class="dv">3</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                                        <span class="dv">94</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                                        <span class="dv">93</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                                        <span class="dv">98</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                                        <span class="dv">87</span>),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                         <span class="at">stat=</span><span class="fu">c</span>(<span class="st">"Defending"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Defending"</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Possession"</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Possession"</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Possession"</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Attacking"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can change the stat column to your liking, but you have to change the scale_fill_manuel() later on as well.</p>
+</details>
+<hr>
+<p>Now we can use this column to color the chart. I’m not interested in every metric though. The ‘npxG+xA’ column for instance. I already have those metrics each in my chart. To pick the metrics you want/don’t want, print the Statistic column and choose.</p>
+<p>{::options parse_block_html=“true” /}</p>
+<details>
+<summary>
+See all statistics
+</summary>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df<span class="sc">$</span>Statistic)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>{::options parse_block_html=“false” /}</p>
+<p>If you want to pick your metrics, use the statement below</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_selected <span class="ot">&lt;-</span> df[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">13</span>,<span class="dv">28</span>,<span class="dv">29</span>,<span class="dv">47</span>,<span class="dv">73</span>,<span class="dv">107</span>,<span class="dv">109</span>,<span class="dv">116</span>,<span class="dv">118</span>,<span class="dv">126</span>,<span class="dv">148</span>),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To colour them by type of the Statistic, we make a new column and fill it with “Attacking”, “Possession” or “Defending”. You can use the StatGroup column that is already provided as well, but this tutorial was made before you could scrape the whole scouting report. This is also the reason the Statistics look random. Just change it to match your data frame.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_selected <span class="ot">&lt;-</span> df_selected <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">stat=</span><span class="fu">case_when</span>(Statistic <span class="sc">==</span> <span class="st">"Non-Penalty Goals"</span><span class="sc">|</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"npxG"</span><span class="sc">|</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"Shots Total"</span><span class="sc">|</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"Assists"</span><span class="sc">|</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"xA"</span><span class="sc">|</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"npxG+xA"</span><span class="sc">|</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"Shot-Creating Actions"</span> <span class="sc">~</span> <span class="st">"Attacking"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"Passes Attempted"</span><span class="sc">|</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"Pass Completion %"</span><span class="sc">|</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"Progressive Passes"</span><span class="sc">|</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"Progressive Carries"</span><span class="sc">|</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"Dribbles Completed"</span><span class="sc">|</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"Touches (Att Pen)"</span><span class="sc">|</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                            Statistic <span class="sc">==</span> <span class="st">"Progressive Passes Rec"</span> <span class="sc">~</span> <span class="st">"Possession"</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Defending"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="making-the-chart" class="level3">
+<h3 class="anchored" data-anchor-id="making-the-chart">Making the chart</h3>
+<p>To make the pizza chart, we will use geom_bar() with coord_polar(). It’s a neat little trick as there isn’t a good package to do it otherwise.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_selected,<span class="fu">aes</span>(<span class="fu">fct_reorder</span>(Statistic,stat),Percentile)) <span class="sc">+</span>                       <span class="co">#select the columns to plot and sort it so the types of metric are grouped</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">100</span>,<span class="at">fill=</span>stat),<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="at">colour=</span><span class="st">"white"</span>,                 <span class="co">#make the whole pizza first</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span>                                                                          <span class="co">#change alphe to make it more or less visible</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="fu">aes</span>(<span class="at">fill=</span>stat),<span class="at">colour=</span><span class="st">"white"</span>) <span class="sc">+</span>                     <span class="co">#insert the values </span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>() <span class="sc">+</span>                                                                       <span class="co">#make it round</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label=</span>Per90,<span class="at">fill=</span>stat),<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"white"</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span>     <span class="co">#add a label for the value. Change 'label=Per.90' to 'label=Percentile' to show the percentiles</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"Possession"</span> <span class="ot">=</span> <span class="st">"#D70232"</span>,                                   <span class="co">#choose colors to fill the pizza parts</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Attacking"</span> <span class="ot">=</span> <span class="st">"#1A78CF"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Defending"</span> <span class="ot">=</span> <span class="st">"#FF9300"</span>)) <span class="sc">+</span>                                                              </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">100</span>))<span class="sc">+</span>                                              <span class="co">#create the white part in the middle.   </span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">""</span>,                                                                         <span class="co">#remove legend title</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data from StatsBomb via FBref"</span>,                                       <span class="co">#credit FBref/StatsBomb</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span>df_selected<span class="sc">$</span>Player[<span class="dv">1</span>])<span class="sc">+</span>                                                    <span class="co">#let the title be te name of the player</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>                                                                     <span class="co">#from here it's only themeing. </span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">"Spartan-Light"</span>),                                    <span class="co">#I downloaded this font from Google Fonts. You can use your own font of course</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">6</span>),</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p align="center">
+<a href="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/first-1.png"> <img src="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/first-1.png" style="width:400px"> </a>
+</p>
+<p>Doesn’t look half bad, but the labels are horrible. Besides that we should add some extra information about the player. The labels need to be rotated so they look better. We can do this by hand, but if we change the number of metrics we’re using we need to do it all over again. So let’s just make a calculation that we can run everytime we make a new chart. I chose to display the ‘Per 90’ stats insteadd of the percentiles. You can change this in geom_label().</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> (<span class="dv">360</span><span class="sc">/</span>(<span class="fu">nrow</span>(df_selected))<span class="sc">/</span><span class="dv">2</span>)                             <span class="co">#find the difference in angle between to labels and divide by two.</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>myAng <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span>temp, <span class="sc">-</span><span class="dv">360</span><span class="sc">+</span>temp, <span class="at">length.out =</span> <span class="fu">nrow</span>(df_selected))  <span class="co">#get the angle for every label</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ang<span class="ot">&lt;-</span><span class="fu">ifelse</span>(myAng <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">90</span>, myAng<span class="sc">+</span><span class="dv">180</span>, myAng)                                    <span class="co">#rotate label by 180 in some places for readability</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>ang<span class="ot">&lt;-</span><span class="fu">ifelse</span>(ang <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">90</span>, ang<span class="sc">+</span><span class="dv">180</span>, ang)                                          <span class="co">#rotate some lables back for readability...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Because some labels are rather long (‘Progressive Passes Rec’ for instance) I decided to let every word start on a new line. I used gsub for that</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_selected<span class="sc">$</span>Statistic <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" "</span>,<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,df_selected<span class="sc">$</span>Statistic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If we plot again and add an extra line we will get a better plot.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_selected,<span class="fu">aes</span>(<span class="fu">fct_reorder</span>(Statistic,stat),Percentile)) <span class="sc">+</span>                       <span class="co">#select the columns to plot and sort it so the types of metric are grouped</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">100</span>,<span class="at">fill=</span>stat),<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="at">colour=</span><span class="st">"white"</span>,                 <span class="co">#make the whole pizza first</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span>                                                                          <span class="co">#change alphe to make it more or less visible</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="fu">aes</span>(<span class="at">fill=</span>stat),<span class="at">colour=</span><span class="st">"white"</span>) <span class="sc">+</span>                     <span class="co">#insert the values </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>() <span class="sc">+</span>                                                                       <span class="co">#make it round</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label=</span>Per90,<span class="at">fill=</span>stat),<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"white"</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span>     <span class="co">#add a label for the value. Change 'label=Per.90' to 'label=Percentile' to show the percentiles</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"Possession"</span> <span class="ot">=</span> <span class="st">"#D70232"</span>,                                   <span class="co">#choose colors to fill the pizza parts</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Attacking"</span> <span class="ot">=</span> <span class="st">"#1A78CF"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Defending"</span> <span class="ot">=</span> <span class="st">"#FF9300"</span>)) <span class="sc">+</span>                                                              </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">100</span>))<span class="sc">+</span>                                              <span class="co">#create the white part in the middle.   </span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">""</span>,                                                                         <span class="co">#remove legend title</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data from StatsBomb via FBref"</span>,                                       <span class="co">#credit FBref/StatsBomb</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span>df_selected<span class="sc">$</span>Player[<span class="dv">1</span>])<span class="sc">+</span>                                                    <span class="co">#let the title be te name of the player</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>                                                                     <span class="co">#from here it's only themeing. </span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>, <span class="at">angle =</span> ang),</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">"Spartan-Light"</span>),                                    <span class="co">#I downloaded this font from Google Fonts. You can use your own font of course</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">6</span>),</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p align="center">
+<a href="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/second-1.png"> <img src="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/second-1.png" style="width:400px"> </a>
+</p>
+<p>That looks much better! From here you can change everything you want. I’m going to add a subtitle, and make some theme adjustments. Adding a picture is something I will add to this tutorial in the future.</p>
+<p align="center">
+<a href="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/third-2.png"> <img src="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/third-2.png" style="width:400px"> </a>
+</p>
+<p>{::options parse_block_html=“true” /}</p>
+<details>
+<summary>
+Let’s see de final code!
+</summary>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_selected,<span class="fu">aes</span>(<span class="fu">fct_reorder</span>(Statistic,stat),Percentile)) <span class="sc">+</span>                       <span class="co">#select the columns to plot and sort it so the types of metric are grouped</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">100</span>,<span class="at">fill=</span>stat),<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="at">colour=</span><span class="st">"white"</span>,                 <span class="co">#make the whole pizza first</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span>                                                                          <span class="co">#change alphe to make it more or less visible</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="fu">aes</span>(<span class="at">fill=</span>stat),<span class="at">colour=</span><span class="st">"white"</span>) <span class="sc">+</span>                     <span class="co">#insert the values </span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>() <span class="sc">+</span>                                                                       <span class="co">#make it round</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label=</span>Per90,<span class="at">fill=</span>stat),<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"white"</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span>      <span class="co">#add a label for the value. Change 'label=Per.90' to 'label=Percentile' to show the percentiles</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"Possession"</span> <span class="ot">=</span> <span class="st">"#D70232"</span>,                                   <span class="co">#choose colors to fill the pizza parts</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Attacking"</span> <span class="ot">=</span> <span class="st">"#1A78CF"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Defending"</span> <span class="ot">=</span> <span class="st">"#FF9300"</span>)) <span class="sc">+</span>                                                              </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">100</span>))<span class="sc">+</span>                                              <span class="co">#create the white part in the middle.   </span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">""</span>,   </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data from StatsBomb via FBref"</span>,     </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>       <span class="co">#remove legend title</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span><span class="fu">glue</span>(<span class="st">"{df_selected$Player[1]} | Leeds United"</span>),</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">subtitle =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{df_selected$season} | Compared to midfielders Top 5 competitions | stats per 90"</span>))<span class="sc">+</span> <span class="co">#let the title be te name of the player                                                </span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>                                                                     <span class="co">#from here it's only themeing. </span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F4F5"</span>,<span class="at">color =</span> <span class="st">"#F2F4F5"</span>),</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F4F5"</span>,<span class="at">color =</span> <span class="st">"#F2F4F5"</span>),</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>, <span class="at">angle =</span> ang),</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">"Spartan-Light"</span>),                                    <span class="co">#I downloaded this font from Google Fonts. You can use your own font of course</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">family=</span><span class="st">"Spartan-Medium"</span>),</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">6</span>),</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+Not too hard to do, right?
+</details>
+<p><br></p>
+<p>{::options parse_block_html=“false” /}</p>
+<p>Note: with coord_polar() in combination with a background colour, I need to trim the image afterwards. I do this with a commandline (on mac OSX) statement in my R session:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">"convert -trim image.png new_image.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Where image.png is my just saved image and new_image.png will be the trimmed one. There is also an option to add the color to ggsave:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"image.png"</span>,<span class="at">bg=</span><span class="st">"#F2F4F5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can add the resolution to ggsave() if the quality is poor.</p>
+<p>I prefer to trim it, as it removes unnecessary parts from the plot.</p>
+</section>
+<section id="some-other-well-known-styles" class="level3">
+<h3 class="anchored" data-anchor-id="some-other-well-known-styles">Some other (well known) styles</h3>
+<p>Some examples, with some well known styles included. Just a head start to create your own style and learn about how the different elements of ggplot work. Play around with colours/fonts/grid lines etc. to create something unique!</p>
+<section id="the-athletic-tom-worville" class="level4">
+<h4 class="anchored" data-anchor-id="the-athletic-tom-worville">The Athletic/ Tom Worville</h4>
+<p align="center">
+<a href="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/athe1.png"> <img src="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/athe1.png" style="width:400px"> </a>
+</p>
+<details>
+<summary>
+The code
+</summary>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_selected,<span class="fu">aes</span>(<span class="fu">fct_reorder</span>(Statistic,stat),Percentile)) <span class="sc">+</span>                       </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">100</span>),<span class="at">fill=</span><span class="st">"#131313"</span>,<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="at">colour=</span><span class="st">"#797979"</span>,                 </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>      </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="fu">aes</span>(<span class="at">fill=</span>stat),<span class="at">colour=</span><span class="st">"#F3FEFC"</span>,<span class="at">alpha=</span><span class="dv">1</span>) <span class="sc">+</span>                     </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span>                                                                      </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">25</span>, <span class="at">colour=</span><span class="st">"#565656"</span>,<span class="at">linetype=</span><span class="st">"longdash"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">50</span>, <span class="at">colour=</span><span class="st">"#565656"</span>,<span class="at">linetype=</span><span class="st">"longdash"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">75</span>, <span class="at">colour=</span><span class="st">"#565656"</span>,<span class="at">linetype=</span><span class="st">"longdash"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span> </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"Possession"</span> <span class="ot">=</span> <span class="st">"#1ADA89"</span>,                                   </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Attacking"</span> <span class="ot">=</span> <span class="st">"#0F70BF"</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Defending"</span> <span class="ot">=</span> <span class="st">"#EC313A"</span>)) <span class="sc">+</span>                                                        </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label=</span>Percentile,<span class="at">fill=</span>stat),<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"white"</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span> </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>,<span class="dv">100</span>))<span class="sc">+</span>                                              </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">""</span>,   </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data from StatsBomb via FBref</span><span class="sc">\n</span><span class="st">Style copied from The Athletic/@worville"</span>,     </span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>       <span class="co">#remove legend title</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span><span class="fu">glue</span>(<span class="st">"{df_selected$Player[1]} | Leeds United"</span>),</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">subtitle =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{df_selected$season} | Compared to midfielders Top 5 competitions | stats per 90"</span>))<span class="sc">+</span>                                                </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>                                                                     </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#131313"</span>,<span class="at">color =</span> <span class="st">"#131313"</span>),</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#131313"</span>,<span class="at">color =</span> <span class="st">"#131313"</span>),</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>,<span class="at">colour =</span> <span class="st">"#FFFFFF"</span>),</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">"Spartan-Light"</span>,<span class="at">colour=</span> <span class="st">"#FEFEFE"</span>),                                   </span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">family=</span><span class="st">"Spartan-Medium"</span>),</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">6</span>),</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">4</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><br></p>
+</section>
+<section id="football-slices" class="level4">
+<h4 class="anchored" data-anchor-id="football-slices">Football Slices</h4>
+<p align="center">
+<a href="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/FooSlice.png"> <img src="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/FooSlice.png" style="width:400px"> </a>
+</p>
+<p>{::options parse_block_html=“true” /}</p>
+<details>
+<summary>
+The code
+</summary>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_selected,<span class="fu">aes</span>(<span class="fu">fct_reorder</span>(Statistic,stat),Percentile)) <span class="sc">+</span>                      </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">100</span>),<span class="at">fill=</span><span class="st">"#FAFBFD"</span>,<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="at">colour=</span><span class="st">"black"</span>,                 </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span>                                                                          </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="fl">0.95</span>,<span class="fu">aes</span>(<span class="at">fill=</span>stat),<span class="at">colour=</span><span class="cn">NA</span>) <span class="sc">+</span>                    </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span>                                                                       </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">25</span>, <span class="at">colour=</span><span class="st">"#CFD0D2"</span>,<span class="at">alpha=</span><span class="dv">1</span>,<span class="at">size=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">50</span>, <span class="at">colour=</span><span class="st">"#CFD0D2"</span>,<span class="at">alpha=</span><span class="dv">1</span>,<span class="at">size=</span><span class="fl">0.1</span>)<span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">75</span>, <span class="at">colour=</span><span class="st">"#CFD0D2"</span>,<span class="at">alpha=</span><span class="dv">1</span>,<span class="at">size=</span><span class="fl">0.1</span>)<span class="sc">+</span> </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>Per90,<span class="at">fill=</span>stat),<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"black"</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span>  </span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"Possession"</span> <span class="ot">=</span> <span class="st">"#F47294"</span>,                                   </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Attacking"</span> <span class="ot">=</span> <span class="st">"#E7D96E"</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Defending"</span> <span class="ot">=</span> <span class="st">"#8FBFEF"</span>)) <span class="sc">+</span>                                                              </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">110</span>))<span class="sc">+</span>                                             </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">""</span>,   </span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data from StatsBomb via FBref</span><span class="sc">\n</span><span class="st">Style copied from @FootballSlices"</span>,     </span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>       <span class="co">#remove legend title</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span><span class="fu">glue</span>(<span class="st">"{df_selected$Player[1]} | Leeds United"</span>),</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">subtitle =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{df_selected$season} | Compared to midfielders Top 5 competitions | stats per 90"</span>))<span class="sc">+</span>                                               </span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>                                                                  </span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#FAFBFD"</span>,<span class="at">color =</span> <span class="st">"#FAFBFD"</span>),</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#FAFBFD"</span>,<span class="at">color =</span> <span class="st">"#FAFBFD"</span>),</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>),</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">"Spartan-Light"</span>),                                    </span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">family=</span><span class="st">"Spartan-Medium"</span>),</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">6</span>),</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><br></p>
+<p>{::options parse_block_html=“false” /}</p>
+</section>
+<section id="one-with-no-background" class="level4">
+<h4 class="anchored" data-anchor-id="one-with-no-background">One with no background</h4>
+<p align="center">
+<a href="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/blank.png"> <img src="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/blank.png" style="width:400px"> </a>
+</p>
+<p>{::options parse_block_html=“true” /}</p>
+<details>
+<summary>
+The code
+</summary>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_selected,<span class="fu">aes</span>(<span class="fu">fct_reorder</span>(Statistic,stat),Percentile)) <span class="sc">+</span>                      </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">100</span>),<span class="at">fill=</span><span class="st">"#F2F4F5"</span>,<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="at">colour=</span><span class="st">"white"</span>,                </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha=</span><span class="dv">1</span>,<span class="at">linetype=</span><span class="st">"dashed"</span>) <span class="sc">+</span>                                                                          </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="at">fill=</span><span class="st">"#D20222"</span>,<span class="at">colour=</span><span class="st">"white"</span>) <span class="sc">+</span>   </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">25</span>, <span class="at">colour=</span><span class="st">"white"</span>,<span class="at">linetype=</span><span class="st">"longdash"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">50</span>, <span class="at">colour=</span><span class="st">"white"</span>,<span class="at">linetype=</span><span class="st">"longdash"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">75</span>, <span class="at">colour=</span><span class="st">"white"</span>,<span class="at">linetype=</span><span class="st">"longdash"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span> </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">100</span>, <span class="at">colour=</span><span class="st">"white"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span> </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>() <span class="sc">+</span>                                                                     </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label=</span>Per90),<span class="at">fill=</span><span class="st">"#D20222"</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"white"</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span>     </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"Possession"</span> <span class="ot">=</span> <span class="st">"#D70232"</span>,                                  </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Attacking"</span> <span class="ot">=</span> <span class="st">"#1A78CF"</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Defending"</span> <span class="ot">=</span> <span class="st">"#FF9300"</span>)) <span class="sc">+</span>                                                              </span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">100</span>))<span class="sc">+</span>                                              </span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">""</span>,   </span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data from StatsBomb via FBref"</span>,     </span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>       <span class="co">#remove legend title</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span><span class="fu">glue</span>(<span class="st">"{df_selected$Player[1]} | Manchester United"</span>),</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{df_selected$season} | Compared to midfielders Top 5 competitions | stats per 90"</span>))<span class="sc">+</span>                                               </span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>                                                                     </span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F4F5"</span>,<span class="at">color =</span> <span class="st">"#F2F4F5"</span>),</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F4F5"</span>,<span class="at">color =</span> <span class="st">"#F2F4F5"</span>),</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>, <span class="at">angle =</span> ang),</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">"Spartan-Light"</span>),                                    </span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">family=</span><span class="st">"Spartan-Medium"</span>),</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">6</span>),</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><br></p>
+<p>{::options parse_block_html=“false” /}</p>
+</section>
+<section id="one-with-other-labels-and-background-colour" class="level4">
+<h4 class="anchored" data-anchor-id="one-with-other-labels-and-background-colour">One with other labels and background colour</h4>
+<p align="center">
+<a href="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/label.png"> <img src="https://raw.githubusercontent.com/RobinKoetsier/robinkoetsier.github.io/master/assets/img/tutorials/pizza/label.png" style="width:400px"> </a>
+</p>
+<p>{::options parse_block_html=“true” /}</p>
+<details>
+<summary>
+The code
+</summary>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>label_data <span class="ot">&lt;-</span> df_selected</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the ANGLE of the labels</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>number_of_bar <span class="ot">&lt;-</span> <span class="fu">nrow</span>(label_data)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>label_data<span class="sc">$</span>id <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">length</span>(label_data<span class="sc">$</span>player_name))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>angle <span class="ot">&lt;-</span>  <span class="dv">90</span> <span class="sc">-</span> <span class="dv">360</span> <span class="sc">*</span> (label_data<span class="sc">$</span>id<span class="fl">-0.5</span>) <span class="sc">/</span>number_of_bar     <span class="co"># I substract 0.5 because the letter must have the angle of the center of the bars. Not extreme right(1) or extreme left (0)</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the alignment of labels: right or left</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># If I am on the left part of the plot, my labels have currently an angle &lt; -90</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>label_data<span class="sc">$</span>hjust<span class="ot">&lt;-</span><span class="fu">ifelse</span>( angle <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">90</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># flip angle BY to make them readable</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>label_data<span class="sc">$</span>angle<span class="ot">&lt;-</span><span class="fu">ifelse</span>(angle <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">90</span>, angle<span class="sc">+</span><span class="dv">180</span>, angle)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_selected,<span class="fu">aes</span>(<span class="fu">fct_reorder</span>(Statistic,stat),Percentile)) <span class="sc">+</span>                      </span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">100</span>),<span class="at">fill=</span><span class="st">"#0066B2"</span>,<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="at">colour=</span><span class="st">"#0066B2"</span>,                </span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha=</span><span class="fl">0.4</span>,<span class="at">linetype=</span><span class="st">"dashed"</span>) <span class="sc">+</span>                                                                          </span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>,<span class="at">width=</span><span class="dv">1</span>,<span class="at">fill=</span><span class="st">"#CC0033"</span>,<span class="at">colour=</span><span class="st">"white"</span>) <span class="sc">+</span>   </span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">25</span>, <span class="at">colour=</span><span class="st">"white"</span>,<span class="at">linetype=</span><span class="st">"longdash"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">50</span>, <span class="at">colour=</span><span class="st">"white"</span>,<span class="at">linetype=</span><span class="st">"longdash"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">75</span>, <span class="at">colour=</span><span class="st">"white"</span>,<span class="at">linetype=</span><span class="st">"longdash"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span> </span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">100</span>, <span class="at">colour=</span><span class="st">"white"</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span> </span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>() <span class="sc">+</span>                                                                     </span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label=</span>Per90),<span class="at">fill=</span><span class="st">"#CC0033"</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">color=</span><span class="st">"white"</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>,<span class="at">family=</span><span class="st">"Spartan-Bold"</span>)<span class="sc">+</span>     </span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"Possession"</span> <span class="ot">=</span> <span class="st">"#D70232"</span>,                                  </span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Attacking"</span> <span class="ot">=</span> <span class="st">"#1A78CF"</span>,</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"Defending"</span> <span class="ot">=</span> <span class="st">"#FF9300"</span>)) <span class="sc">+</span>                                                              </span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">110</span>))<span class="sc">+</span>                                              </span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">""</span>,   </span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data from StatsBomb via FBref"</span>,     </span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>       <span class="co">#remove legend title</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span><span class="fu">glue</span>(<span class="st">"{df_selected$Player[1]} | Bayern Munich"</span>),</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{df_selected$season} | Compared to attackers Top 5 competitions | stats per 90"</span>))<span class="sc">+</span>                                               </span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>label_data, <span class="fu">aes</span>(<span class="at">x=</span>id, <span class="at">y=</span><span class="dv">100</span><span class="sc">+</span><span class="dv">10</span>, <span class="at">label=</span>Statistic, <span class="at">hjust=</span>hjust), </span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">color=</span><span class="st">"#0066B2"</span>, <span class="at">fontface=</span><span class="st">"bold"</span>,<span class="at">alpha=</span><span class="fl">0.6</span>, <span class="at">size=</span><span class="fl">2.5</span>, <span class="at">angle=</span> label_data<span class="sc">$</span>angle, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span> )  <span class="sc">+</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>                                                                     </span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F4F5"</span>,<span class="at">color =</span> <span class="st">"#F2F4F5"</span>),</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F4F5"</span>,<span class="at">color =</span> <span class="st">"#F2F4F5"</span>),</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>       <span class="co"># axis.text.x = element_text(size = 6, angle = ang),</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">"Spartan-Light"</span>),                                    </span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">family=</span><span class="st">"Spartan-Medium"</span>),</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">6</span>),</span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><br></p>
+<p>{::options parse_block_html=“false” /}</p>
+<p>If you have any questions, <a href="https://twitter.com/RobinWilhelmus">contact me on Twitter.</a> and please tag me if you make a chart yourself! Love to see what people make of it.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<div>
+<hr>
+
+<h3> Support my work with a coffee </h3>
+
+<script type="text/javascript" src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script><script type="text/javascript">kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'X8X05VG5Z');kofiwidget2.draw();</script> 
+<h3> Share </h3>
+
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-hashtags="#rstats" data-show-count="false">Tweet</a><script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<hr>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="RobinKoetsier/site_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+  </div>
+</footer>
+
+
+
+</body></html>

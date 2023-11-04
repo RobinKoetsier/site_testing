@@ -1,0 +1,10 @@
+---
+title: "Page Not Found"
+format:
+  html:
+    theme: cosmo
+---
+
+# Page not found... But while you're here, [maybe make a Pizza Chart?](https://www.robinkoetsier.nl/tutorials/radarpizzachart/)
+
+![](images/404.png)

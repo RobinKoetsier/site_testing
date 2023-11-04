@@ -1,0 +1,14 @@
+{
+  "hash": "fc9b993f991399853654a7ce6aada7e9",
+  "result": {
+    "markdown": "---\ntitle: \"Home\"\nformat: html\neditor: visual\nlisting: \n  - id: stuff\n    contents:\n    - \"posts\"\n    - \"tutorials\"\n    sort: \"date desc\"\n\n---\n\n\n------------------------------------------------------------------------\n\n### Welcome!!\n\nMy name is Robin Koetsier. This site serves as a personal site for my data and blog posts. \n\nI mostly write/visualize stuff about Dutch football. On my Twitter profile you can follow me for visualizations of Eredivisie matches and other stuff. I will update the Eredivisie stats after every matchday. Below you can check all my posts combined. In the menu they are divided by what kind of post it is. \n\n\n::: {.cell}\n\n:::\n\n\n<br> <br> <br>\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

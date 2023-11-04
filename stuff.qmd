@@ -1,0 +1,18 @@
+---
+title: "Other stuff I do"
+listing:
+  contents: "stuff"
+  feed: true
+  sort: "date desc"
+  type: grid
+  categories: false
+  sort-ui: true
+  filter-ui: true
+  #image-placeholder: images/image-placeholder.png
+  fields: [image, title]
+page-layout: full
+title-block-banner: false
+---
+
+----
+

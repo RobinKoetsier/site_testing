@@ -1,0 +1,83 @@
+project:
+  type: website
+execute:
+  freeze: auto
+website:
+  google-analytics: "UA-175572271-3"
+  cookie-consent: true
+  twitter-card: true
+  favicon: images/favicon.ico
+  title: "Getting Blue Fingers"
+  page-navigation: true
+  
+  site-url: https://www.gettingbluefingers.com
+  repo-url: https://github.com/robinkoetsier
+  #repo-actions: [edit, issue]
+  sidebar:
+    tools: 
+      - icon: spotify
+        href: https://open.spotify.com/show/6cSujEBBISBaUUc5POnjtx
+        text: "Tussen de linies podcast"
+      - icon: github
+        href: https://github.com/robinkoetsier
+        text: "My Github"
+      - icon: twitter
+        href: https://twitter.com/RobinWilhelmus
+        text: "Personal Twitter"    
+      - icon: bar-chart-line
+        href: https://twitter.com/EredivisiePlots
+        text: "Eredivisieplots Twitter"    
+    pinned: true
+    style: "floating"
+    search: true
+    collapse-level: 2
+    title: ""
+    align: center
+    contents:
+      - text: "Posts"
+        href: posts.qmd
+      - text: "Tutorials"
+        href: tutorials.qmd
+      - text: "Other stuff I do"
+        href: stuff.qmd
+      - section: "Eredivisie stats"  
+        contents: 
+        - text: "xRank"
+          href: rank.Qmd
+        - text: "Shooting"
+          href: Shots.Qmd
+        - text: "Passing"
+          href: passes.Qmd
+      - section: "KKD stats"  
+        contents: 
+        - text: "xRank"
+          href: rankKKD.Qmd
+        - text: "Shooting"
+          href: ShotsKKD.Qmd
+        - text: "Passing"
+          href: passesKKD.Qmd
+      - about.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+format: 
+  html:
+    theme:
+      light: [cosmo, theme.scss] # from https://github.com/sta210-s22/website/blob/main/_quarto.yml
+      #dark: [cosmo, theme-dark.scss]
+      dark: solar
+    
+    code-overflow: scroll
+    toc: false
+    #mainfont: Roboto
+    #sansfont: Roboto
+ 
+
+
+    
+    #css: styles.css
+    
+
+
+

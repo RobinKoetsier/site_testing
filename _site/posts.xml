@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Getting Blue Fingers</title>
+<link>https://www.gettingbluefingers.com/posts.html</link>
+<atom:link href="https://www.gettingbluefingers.com/posts.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.1.251</generator>
+<lastBuildDate>Tue, 02 Mar 2021 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Expected Points</title>
+  <link>https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<hr>
+<p><img src="https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/img/0.png" class="img-fluid" width="750"></p>
+<p><br> <br> This post is about Expected Points</p>
+<p>Read the Dutch version of this article <a href="https://www.tussendelinies.nl/expected-points/">here</a></p>
+<p>You probably read already about it, or saw it in some tweet/picture/anything, Expected Points. From understat to Opta, they are all using it. There are some different ways to calculate it though. In this article I will tell you my method, the method we use for our dashboard at <a href="https://www.tussendelinies.nl/data-dashboard">Tussen de Linies</a></p>
+<p><br> #### XPOINTS? What can we do with xPoints and do we need it?<br>
+We can use xPoints to see where we may expect a team in the league table. In short: it is a way to show how well they perform this season, looking at their shots.<br>
+Raw xG numbers don’t say everything, as the quality of the chances plays a role as well.</p>
+<section id="an-example" class="level4">
+<h4 class="anchored" data-anchor-id="an-example">AN EXAMPLE</h4>
+<p>Let’s take a look at the game FC Groningen against FC Twente. The game ended in 2-2 with xG 1.9 and 1.5. In the table you’ll see the chances for both teams to win.</p>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/img/1.png"></p>
+</div>
+<p>As you can see, the xG of Groningen is 0.5 higher (almost 36%), but the chance to win is 86% percent higher. The size of the chances is what decides the difference.</p>
+<p><br></p>
+<section id="how-big-are-the-chances" class="level5">
+<h5 class="anchored" data-anchor-id="how-big-are-the-chances">HOW BIG ARE THE CHANCES?</h5>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/img/2.jpg"></p>
+</div>
+<p>Besides the two goals, Groningen has a lot of medium sized chances. Twente has three good chances, but not much else. For getting the chance to win and so the expected points, we will simulate those chances. <br></p>
+</section>
+</section>
+<section id="the-calculation" class="level4">
+<h4 class="anchored" data-anchor-id="the-calculation">THE CALCULATION</h4>
+<p>For every shot we draw a random number between 0 and 1. Everytime this number is smaller than the xG of that shot, the shot becomes a goal. After we’ve done this for every shot in the match, we got a number of home- and away goals and so a result (home win/draw/away win). We simulate a match this way for ten thousand times. Each result is stored and after all the simulations we count the number of different results to determine the chance for both teams to win. It’s simple the perentage of simulations resulting in that specific result.</p>
+<p>After we have those chances, we multiply the chance to win with 3 and the chance for a draw with 1 for both teams. So: Groningen 49.04% * 3 punten + 24.72% * 1 punt = 1.72</p>
+<p>Those calculations will give us a number of points that we call Expected Points. Doing this for a whole season will give us an Expected Rank. In this match, Groningen didn’t got enough with there 1 real point, but over the whole season they got too many points.</p>
+<p><br></p>
+</section>
+<section id="the-problems" class="level4">
+<h4 class="anchored" data-anchor-id="the-problems">THE PROBLEM(S)</h4>
+<p>Game state is very much resposible for the way a team acts. If you’re leading by an early goal, the urge to attack fades away. The opponent will attack instead and will get a higher xG with every shot they take. If they don’t score, they keep attacking without scoring. So the xG skews in their favour, even if their chances are poor. Scoring 2 or 3 goals from less than 1 xG in the beginning of the game will also have this result, as the opponent must attack and have a comfortable lead.</p>
+<p>The experience learns us that over a whole season, xPoints is good in giving us a fair picture about the teams in a competition.</p>
+</section>
+<section id="how-does-x-perform-over-time" class="level4">
+<h4 class="anchored" data-anchor-id="how-does-x-perform-over-time">HOW DOES X PERFORM OVER TIME?</h4>
+<p>If you want to see a xPoints timeline of you’re favorite Eredivisie team, hit me up on <a href="https://www.twitter.com/RobinWilhelmus">Twitter!</a></p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/index.html</guid>
+  <pubDate>Tue, 02 Mar 2021 23:00:00 GMT</pubDate>
+  <media:content url="https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/img/0.png" medium="image" type="image/png" height="87" width="144"/>
+</item>
+<item>
+  <title>Extraordinary Giakoumakis</title>
+  <link>https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><img src="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/0.jpg" class="img-fluid"></p>
+<p><br>Giakoumakis stays with VVV for at least the rest of the season. He scored 21 goals (6 penalties) already this season. Is he really that good? Let’s find out if a bigger club should go after him this summer. <br> He had 15 non penalty goals. His shot map looks great. Very few shots from outside the penalty box and a lot of central shots. His NPxG is 8.46, which already shows his overperformance.<br>
+</p>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/1.jpg" class="img-fluid" width="750"></p>
+</div>
+<p><br> Let’s take a closer look at the xG of his chances. I divided his chances in 0.1 xG bins. We see that most of his chances are really small (&lt; 0.1 xG), but he scores relative many of those chances(4 from 36). The same goes for the 0.1-0.2 bin where he scored 4 from 12. What can we do with xPoints and do we need it?<br>
+</p>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/2.jpg" class="img-fluid" width="750"></p>
+</div>
+<p><br> So, how extraordinary is this? I’ve simulated all his non penalty shots a million times to see how much he would score. As we can see, the chance that he scores 15 of them is only a few percent! Scoring only 3 goals is more likely than the 15 he has!<br>
+</p>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/3.jpg" class="img-fluid" width="750"></p>
+</div>
+<p><br> If we look at the minimum number of goals scored in the simulations, we see that he has an almost 50% chance of scoring at least 9 goals. The chance at scoring 11 or more goals is less than 25%<br>
+</p>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/4.jpg" class="img-fluid" width="750"></p>
+</div>
+<p>Will he continue this form the rest of the season? Possible, but unlikely. Will he manage this next season as well? Even more unlikely.</p>
+<p>VVV should’ve sold him already in my opinion as they are safe from relegation. Now they should certainly sell him at the end of the season.</p>
+
+
+
+ ]]></description>
+  <guid>https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/index.html</guid>
+  <pubDate>Wed, 03 Feb 2021 23:00:00 GMT</pubDate>
+  <media:content url="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/0.jpg" medium="image" type="image/jpeg"/>
+</item>
+</channel>
+</rss>

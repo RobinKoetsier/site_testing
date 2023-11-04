@@ -1,0 +1,7 @@
+- source: project
+  quarto-pub:
+    - id: cba6f8c8-5aa3-462f-a307-3c7d34b38f87
+      url: 'https://quartopub.com/sites/eredivisieplots/getting-blue-fingers'
+  netlify:
+    - id: 32afb6d0-7fe7-44ac-8d99-63adbcd2220d
+      url: 'https://www.gettingbluefingers.com'

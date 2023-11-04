@@ -1,0 +1,23 @@
+---
+title: "Podcasts"
+format:
+  html:
+    theme: cosmo
+image: img/logo.jpg
+---
+
+I'm in the monthly Dutch football podcast from 'Tussen de linies'. You can check the latest episode here:
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/5hKV4AGlKXUGHQKOfwpYnh?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+
+</iframe>
+
+All episodes:
+
+{{< fa brands spotify >}} [Spotify](https://open.spotify.com/show/6cSujEBBISBaUUc5POnjtx?si=JLCg-ABQRB-2DQ3JxDz54w&nd=1)
+
+{{< fa brands apple >}} [Apple Music](https://podcasts.apple.com/nl/podcast/tussen-de-linies-de-podcast/id1634794641)
+
+Besides that, I was also in one episode of the 'Showkeepers Podcast' (also in Dutch)
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/6xTmyaz2ZmtaDPA46TSWCf?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>

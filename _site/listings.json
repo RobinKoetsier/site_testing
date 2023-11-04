@@ -1,0 +1,38 @@
+[
+  {
+    "listing": "/stuff.html",
+    "items": [
+      "/stuff/twitter/index.html",
+      "/stuff/podcasts/index.html"
+    ]
+  },
+  {
+    "listing": "/Work.html",
+    "items": []
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/tutorials/2022-10-18_xpoints-table/index.html",
+      "/tutorials/2022-10-10_shot-areas/index.html",
+      "/tutorials/RadarPizzaChart/index.html",
+      "/posts/2021-03-03_Expected-points/index.html",
+      "/posts/2021-02-04_Giakoumakis/index.html"
+    ]
+  },
+  {
+    "listing": "/tutorials.html",
+    "items": [
+      "/tutorials/2022-10-18_xpoints-table/index.html",
+      "/tutorials/2022-10-10_shot-areas/index.html",
+      "/tutorials/RadarPizzaChart/index.html"
+    ]
+  },
+  {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/2021-03-03_Expected-points/index.html",
+      "/posts/2021-02-04_Giakoumakis/index.html"
+    ]
+  }
+]
