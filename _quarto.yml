@@ -43,19 +43,19 @@ website:
       - section: "Eredivisie stats"  
         contents: 
         - text: "xRank"
-          href: rank.Qmd
+          href: rank.qmd
         - text: "Shooting"
-          href: Shots.Qmd
+          href: Shots.qmd
         - text: "Passing"
-          href: passes.Qmd
+          href: passes.qmd
       - section: "KKD stats"  
         contents: 
         - text: "xRank"
-          href: rankKKD.Qmd
+          href: rankKKD.qmd
         - text: "Shooting"
-          href: ShotsKKD.Qmd
+          href: ShotsKKD.qmd
         - text: "Passing"
-          href: passesKKD.Qmd
+          href: passesKKD.qmd
       - about.qmd
       - icon: github
         href: https://github.com/
