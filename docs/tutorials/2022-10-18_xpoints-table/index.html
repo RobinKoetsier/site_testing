@@ -1,0 +1,2454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="dcterms.date" content="2022-10-18">
+<meta name="description" content="Calculate the expected points yourself with the worldfootballR package">
+<title>Getting Blue Fingers - xPoints</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script type="text/plain" cookie-consent="tracking">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-175572271-3', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script><script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  });
+});
+</script>
+<meta name="twitter:title" content="Getting Blue Fingers - xPoints">
+<meta name="twitter:description" content="Calculate the expected points yourself with the worldfootballR package">
+<meta name="twitter:image" content="https://www.gettingbluefingers.com/tutorials/2022-10-18_xpoints-table/img/0.png">
+<meta name="twitter:image-height" content="1536">
+<meta name="twitter:image-width" content="1870">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Getting Blue Fingers
+      </li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-center sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Getting Blue Fingers</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://open.spotify.com/show/6cSujEBBISBaUUc5POnjtx" rel="" title="Tussen de linies podcast" class="quarto-navigation-tool px-1" aria-label="Tussen de linies podcast"><i class="bi bi-spotify"></i></a>
+    <a href="https://github.com/robinkoetsier" rel="" title="My Github" class="quarto-navigation-tool px-1" aria-label="My Github"><i class="bi bi-github"></i></a>
+    <a href="https://twitter.com/RobinWilhelmus" rel="" title="Personal Twitter" class="quarto-navigation-tool px-1" aria-label="Personal Twitter"><i class="bi bi-twitter"></i></a>
+    <a href="https://twitter.com/EredivisiePlots" rel="" title="Eredivisieplots Twitter" class="quarto-navigation-tool px-1" aria-label="Eredivisieplots Twitter"><i class="bi bi-bar-chart-line"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Posts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorials</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../stuff.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Other stuff I do</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Eredivisie stats</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../rank.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">xRank</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Shots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shooting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../passes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Passing</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">KKD stats</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../rankKKD.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">xRank</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ShotsKKD.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Shooting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../passesKKD.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Passing</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About me</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro">INTRO</a></li>
+  <li><a href="#loading-the-packages" id="toc-loading-the-packages" class="nav-link" data-scroll-target="#loading-the-packages">LOADING THE PACKAGES</a></li>
+  <li><a href="#getting-the-match-data" id="toc-getting-the-match-data" class="nav-link" data-scroll-target="#getting-the-match-data">GETTING THE MATCH DATA</a></li>
+  <li><a href="#table-with-xg-per-team" id="toc-table-with-xg-per-team" class="nav-link" data-scroll-target="#table-with-xg-per-team">TABLE WITH XG PER TEAM</a></li>
+  <li><a href="#calculate-xpoints" id="toc-calculate-xpoints" class="nav-link" data-scroll-target="#calculate-xpoints">CALCULATE XPOINTS</a></li>
+  <li><a href="#get-current-league-table" id="toc-get-current-league-table" class="nav-link" data-scroll-target="#get-current-league-table">GET CURRENT LEAGUE TABLE</a></li>
+  <li><a href="#join-tables" id="toc-join-tables" class="nav-link" data-scroll-target="#join-tables">JOIN TABLES</a></li>
+  <li><a href="#making-the-table" id="toc-making-the-table" class="nav-link" data-scroll-target="#making-the-table">MAKING THE TABLE</a></li>
+  <li><a href="#some-notes" id="toc-some-notes" class="nav-link" data-scroll-target="#some-notes">SOME NOTES</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">xPoints</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/RobinKoetsier/temp/blob/master/twitter/xPoints.R"><i class="bi"></i> Code</button></div></div>
+</div>
+
+<div>
+  <div class="description">
+    Calculate the expected points yourself with the worldfootballR package
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 18, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header><section id="intro" class="level3"><h3 class="anchored" data-anchor-id="intro">INTRO</h3>
+<p>Now that expected goals get more common and accepted, more people are realising that it is mostly for rating a teams performance over more matches. Because some matches will skew the xG of a team, we can use expected points to see how well they perform against there underlying numbers. To read more about expected points an how we calculate it, <a href="&quot;https://www.gettingbluefingers.com/posts/2021-03-03_expected-points/&quot;">you can read this article from me.</a> In short: we look at the size of the chances to see how much points a team deserved in a match instead of only looking at the total xG.</p>
+</section><section id="loading-the-packages" class="level3"><h3 class="anchored" data-anchor-id="loading-the-packages">LOADING THE PACKAGES</h3>
+<p>Make sure you have the newest version of <code>worldfootballR</code>.</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_98748c2a8285537642aad39a291dff57">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># devtools::install_github("JaseZiv/worldfootballR")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JaseZiv/worldfootballR">worldfootballR</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="getting-the-match-data" class="level3"><h3 class="anchored" data-anchor-id="getting-the-match-data">GETTING THE MATCH DATA</h3>
+<p>As we are simulating every shot in every match multiple times, we need to load all the shots from the competition we want to use.</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-4_a09a7ff32b8840d8dbaaf4f254b666fb">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#get match id's</span></span>
+<span><span class="va">league_matches</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/worldfootballR/man/fotmob_get_league_matches.html">fotmob_get_league_matches</a></span><span class="op">(</span></span>
+<span>  country <span class="op">=</span>     <span class="st">"ENG"</span>,</span>
+<span>  league_name <span class="op">=</span> <span class="st">"Championship"</span></span>
+<span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co">#filter out matches in the future</span></span>
+<span><span class="va">league_matches</span> <span class="op">&lt;-</span> <span class="va">league_matches</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">league_matches</span><span class="op">$</span><span class="va">status</span><span class="op">$</span><span class="va">reason</span><span class="op">$</span><span class="va">short</span> <span class="op">==</span> <span class="st">"FT"</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co">#get matches for those id's</span></span>
+<span><span class="va">match_details</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/worldfootballR/man/fotmob_get_match_details.html">fotmob_get_match_details</a></span><span class="op">(</span><span class="va">league_matches</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-6_617ab2c54abb7d76f0119177a06e401c">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># unnest the shots only needed in older versions of worldfootballR so commented it out) </span></span>
+<span><span class="co"># and add team name of team shooting and team conceding (</span></span>
+<span><span class="va">shots_temp</span> <span class="op">&lt;-</span> <span class="va">match_details</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co">#unnest(shots) %&gt;%</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>team_name <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">team_id</span> <span class="op">==</span> <span class="va">home_team_id</span> <span class="op">~</span> <span class="va">home_team</span>,</span>
+<span>                              <span class="va">team_id</span> <span class="op">==</span> <span class="va">away_team_id</span> <span class="op">~</span> <span class="va">away_team</span><span class="op">)</span>,</span>
+<span>         opponent <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">team_id</span> <span class="op">==</span> <span class="va">home_team_id</span> <span class="op">~</span> <span class="va">away_team</span>,</span>
+<span>                              <span class="va">team_id</span> <span class="op">==</span> <span class="va">away_team_id</span> <span class="op">~</span> <span class="va">home_team</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you want all the leagues and their id’s/names/countries, read the csv from github</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-8_494a8b96c4848ca1ee470fd0f9aac121">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">leagues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/JaseZiv/worldfootballR_data/master/raw-data/fotmob-leagues/all_leagues.csv"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">leagues</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ccode       country   id                 name
+1   INT International   42     Champions League
+2   INT International   73        Europa League
+3   INT International  525 AFC Champions League
+4   INT International 9469              AFC Cup
+5   INT International 9841              AFC U19
+6   INT International 9265       AFF Suzuki Cup
+                                    page_url
+1      /leagues/42/overview/champions-league
+2         /leagues/73/overview/europa-league
+3 /leagues/525/overview/afc-champions-league
+4             /leagues/9469/overview/afc-cup
+5             /leagues/9841/overview/afc-u19
+6      /leagues/9265/overview/aff-suzuki-cup</code></pre>
+</div>
+</div>
+<p>View the data frame and search in it!</p>
+</section><section id="table-with-xg-per-team" class="level3"><h3 class="anchored" data-anchor-id="table-with-xg-per-team">TABLE WITH XG PER TEAM</h3>
+<p>First we make a table with the xG for and against of every team. This is also possible through <a href="https://github.com/JaseZiv/worldfootballR">worldfootballR</a>, but the function doesn’t work at the moment.</p>
+<details><summary>
+Function that currently doesn’t work
+</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ere_team_xg_2022</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/worldfootballR/man/fotmob_get_season_stats.html">fotmob_get_season_stats</a></span><span class="op">(</span></span>
+<span>  league_id <span class="op">=</span> <span class="fl">48</span>, <span class="co">#48 is the code for the Championship</span></span>
+<span>  season_name <span class="op">=</span> <span class="st">"2022/2023"</span>,</span>
+<span>  stat_name <span class="op">=</span> <span class="st">"Expected goals"</span>,</span>
+<span>  team_or_player <span class="op">=</span> <span class="st">"team"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell" data-hash="index_cache/html/unnamed-chunk-10_b147b4a24f944641be3a37e19d6a15fc">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">xG_table</span> <span class="op">&lt;-</span> <span class="va">shots_temp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>expected_goals <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="va">expected_goals</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co">#replace the NA for own goals to 0</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">team_name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>xGF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">expected_goals</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co">#xG for</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">shots_temp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co">#join with xG against</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>expected_goals <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="va">expected_goals</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">opponent</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>xGA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">expected_goals</span><span class="op">)</span><span class="op">)</span>,by<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"team_name"</span> <span class="op">=</span> <span class="st">"opponent"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">xG_table</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  team_name          xGF   xGA
+  &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;
+1 Birmingham City   15.2  17.6
+2 Blackburn Rovers  14.4  18.2
+3 Blackpool         16.4  21.9
+4 Bristol City      18.6  21.8
+5 Burnley           17.5  14.0
+6 Cardiff City      13.7  13.9</code></pre>
+</div>
+</div>
+<p>Nice, so we have the xG of the teams. Note that you can also filter <code>shots_temp</code> to exclude penalties. I keep them in as I want to make a table with the complete xG and xPoints picture.</p>
+<p>Now for the hard part, calculating the xPoints per match. To calculate it, we will build a function to simulate every shot in the match. We do that ten thousand times and count the times every team wins/draws/loses. To get some more info, read <a href="&quot;https://www.gettingbluefingers.com/posts/2021-03-03_expected-points/#the-calculation&quot;">the calculation in my old article about it.</a></p>
+</section><section id="calculate-xpoints" class="level3"><h3 class="anchored" data-anchor-id="calculate-xpoints">CALCULATE XPOINTS</h3>
+<p>So first we make the function to simulate all the shots. It is an old function of mine that contains other functions as well. The easiest is to copy all the functions and just paste them in a new rscript.</p>
+<details><summary>
+the functions
+</summary><div class="cell" data-hash="index_cache/html/unnamed-chunk-12_4cd68beab6cbe2a500a8b707a0a75f7e">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># main function</span></span>
+<span><span class="va">calculateChance</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">team1</span>,<span class="va">team2</span>,<span class="va">p</span><span class="op">)</span><span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">home</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="va">away</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="va">draw</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="va">homeP</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="va">awayP</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="va">drawP</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span>  </span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">p</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">matchWinner</span> <span class="op">&lt;-</span> <span class="fu">calculateWinner</span><span class="op">(</span><span class="va">team1</span>,<span class="va">team2</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="kw">if</span><span class="op">(</span><span class="va">matchWinner</span> <span class="op">==</span> <span class="st">"home"</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="va">home</span> <span class="op">&lt;-</span> <span class="va">home</span><span class="op">+</span><span class="fl">1</span></span>
+<span>      <span class="va">homeP</span> <span class="op">&lt;-</span> <span class="va">homeP</span><span class="op">+</span><span class="fl">3</span></span>
+<span>    <span class="op">}</span><span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">matchWinner</span> <span class="op">==</span> <span class="st">"away"</span><span class="op">)</span><span class="op">{</span></span>
+<span>      </span>
+<span>      <span class="va">away</span> <span class="op">&lt;-</span> <span class="va">away</span><span class="op">+</span><span class="fl">1</span></span>
+<span>      <span class="va">awayP</span> <span class="op">&lt;-</span> <span class="va">awayP</span><span class="op">+</span><span class="fl">3</span></span>
+<span>    <span class="op">}</span><span class="kw">else</span><span class="op">{</span></span>
+<span>      <span class="va">draw</span> <span class="op">&lt;-</span> <span class="va">draw</span> <span class="op">+</span><span class="fl">1</span></span>
+<span>      <span class="va">awayP</span> <span class="op">&lt;-</span> <span class="va">awayP</span><span class="op">+</span><span class="fl">1</span></span>
+<span>      <span class="va">homeP</span> <span class="op">&lt;-</span> <span class="va">homeP</span><span class="op">+</span><span class="fl">1</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="va">home</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">home</span><span class="op">/</span><span class="op">(</span><span class="va">p</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span>,<span class="st">"%"</span><span class="op">)</span></span>
+<span>  <span class="va">away</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">away</span><span class="op">/</span><span class="op">(</span><span class="va">p</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span>,<span class="st">"%"</span><span class="op">)</span></span>
+<span>  <span class="va">draw</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">draw</span><span class="op">/</span><span class="op">(</span><span class="va">p</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span>,<span class="st">"%"</span><span class="op">)</span></span>
+<span>  <span class="va">homeP</span> <span class="op">=</span> <span class="va">homeP</span><span class="op">/</span><span class="va">p</span></span>
+<span>  <span class="va">awayP</span> <span class="op">=</span> <span class="va">awayP</span><span class="op">/</span><span class="va">p</span></span>
+<span>  </span>
+<span>  <span class="va">chances</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Home win: "</span>,<span class="va">home</span>,<span class="st">"% | Draw: "</span>,<span class="va">draw</span>,<span class="st">"% | Away win: "</span>,<span class="va">away</span>,<span class="st">"%"</span><span class="op">)</span></span>
+<span>  <span class="va">game</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">home</span>,<span class="va">draw</span>,<span class="va">away</span>,<span class="va">homeP</span>,<span class="va">awayP</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">game</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># function that returns if a shot becomes a goal and counts the goals</span></span>
+<span><span class="va">testShots</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">XG</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">Goals</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="va">XG</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">XG</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">XG</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.0</span>, <span class="fl">1.0</span><span class="op">)</span><span class="op">&lt;=</span><span class="va">XG</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">{</span></span>
+<span>      </span>
+<span>      <span class="va">Goals</span> <span class="op">&lt;-</span> <span class="va">Goals</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span>    <span class="op">}</span><span class="kw">else</span><span class="op">{</span></span>
+<span>      </span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">Goals</span><span class="op">)</span></span>
+<span><span class="op">}</span>  </span>
+<span></span>
+<span><span class="co"># function that calculates the winner by comparing the number of goals of the two teams</span></span>
+<span><span class="va">calculateWinner</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">home</span>,<span class="va">away</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">HomeGoals</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="va">AwayGoals</span> <span class="op">=</span> <span class="fl">0</span></span>
+<span>  </span>
+<span>  <span class="va">HomeGoals</span> <span class="op">&lt;-</span> <span class="fu">testShots</span><span class="op">(</span><span class="va">home</span><span class="op">)</span></span>
+<span>  <span class="va">AwayGoals</span> <span class="op">&lt;-</span> <span class="fu">testShots</span><span class="op">(</span><span class="va">away</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#diffTemp &lt;- (HomeGoals - AwayGoals)</span></span>
+<span>  </span>
+<span>  <span class="co">#diff &lt;- append(diff,diffTemp)</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">HomeGoals</span> <span class="op">&gt;</span> <span class="va">AwayGoals</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">"home"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">AwayGoals</span> <span class="op">&gt;</span> <span class="va">HomeGoals</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">"away"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="kw">else</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">"draw"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details><p>To use this function on the data frame of all the shots we are going to wrap it in a function so we can use it easier. The <code>10000</code> is the times we simulate every match. You can put it higher, but you’ll have to wait longer for the results.</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-14_97b906cc7ad51e7fb8385a7015fc1928">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_func</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu">calculateChance</span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">team_id</span> <span class="op">==</span> <span class="va">home_team_id</span><span class="op">)</span>,<span class="va">expected_goals</span><span class="op">)</span>,</span>
+<span>                                      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">team_id</span> <span class="op">==</span> <span class="va">away_team_id</span><span class="op">)</span>,<span class="va">expected_goals</span><span class="op">)</span>,</span>
+<span>                                      <span class="fl">10000</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And than just use it.</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-16_aa83fbcfab9a059fb971ad43e552657f">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">shots_temp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">match_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>result <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">plot_func</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+  match_id data               home   draw   away   homeP awayP
+     &lt;int&gt; &lt;list&gt;             &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1  3915324 &lt;tibble [18 × 43]&gt; 3.07%  32.8%  64.13% 0.420 2.25 
+2  3915311 &lt;tibble [13 × 43]&gt; 23.4%  65.91% 10.69% 1.36  0.980
+3  3915310 &lt;tibble [22 × 43]&gt; 18.08% 29.35% 52.57% 0.836 1.87 
+4  3915302 &lt;tibble [9 × 43]&gt;  5.82%  68.97% 25.21% 0.864 1.45 
+5  3915309 &lt;tibble [24 × 43]&gt; 52.59% 28.04% 19.37% 1.86  0.862
+6  3915308 &lt;tibble [26 × 43]&gt; 55.47% 26.45% 18.08% 1.93  0.807</code></pre>
+</div>
+</div>
+<p>Let’s join this with the data frame which contains the matches and teams</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-18_1a87cc3673c6dc56dd9a06db04278c2d">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">total_df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">match_id</span>,<span class="va">homeP</span>,<span class="va">awayP</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">match_details</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">match_id</span>,<span class="va">home_team</span>,<span class="va">away_team</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>              <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "match_id"</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># if you unnested the match_details earlier, you can just join by 'match_id'</span></span>
+<span></span>
+<span><span class="co"># and sum all the xPoints per team</span></span>
+<span><span class="va">xpoints</span> <span class="op">&lt;-</span> <span class="va">total_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">home_team</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>pointsH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">homeP</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">total_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">away_team</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>pointsA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">awayP</span><span class="op">)</span><span class="op">)</span>,by <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"home_team"</span><span class="op">=</span><span class="st">"away_team"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>xPoints <span class="op">=</span> <span class="va">pointsH</span> <span class="op">+</span> <span class="va">pointsA</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">xpoints</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  home_team        pointsH pointsA xPoints
+  &lt;chr&gt;              &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 Birmingham City     9.68    8.79    18.5
+2 Blackburn Rovers   10.7     7.55    18.3
+3 Blackpool           7.60    8.13    15.7
+4 Bristol City       10.6     7.73    18.3
+5 Burnley            11.7    10.2     21.9
+6 Cardiff City        9.83    7.83    17.7</code></pre>
+</div>
+</div>
+</section><section id="get-current-league-table" class="level3"><h3 class="anchored" data-anchor-id="get-current-league-table">GET CURRENT LEAGUE TABLE</h3>
+<p>To make our own table complete, we need just one more data frame: the actual league table. I will show you the code of the function, but this one doesn’t work for me. If you use this function, be aware the every column name has the prefix ‘table_’ and that those do not appear in my code!</p>
+<details><summary>
+worldfootballR FotMob function to get table
+</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/worldfootballR/man/fotmob_get_league_tables.html">fotmob_get_league_tables</a></span><span class="op">(</span></span>
+<span>  country <span class="op">=</span>     <span class="st">"ENG"</span>,</span>
+<span>  league_name <span class="op">=</span> <span class="st">"Championship"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><p>I dove in the code to find the place where the table should be and found it, so you can copy the code beneath.</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-20_9da8aac76fa3e22b33fe7e3f568cb2fa">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">safely_from_json</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/safely.html">safely</a></span><span class="op">(</span><span class="fu">jsonlite</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">fromJSON</a></span>, otherwise <span class="op">=</span> <span class="cn">NULL</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">jsonn</span> <span class="op">&lt;-</span> <span class="fu">safely_from_json</span><span class="op">(</span><span class="st">"https://www.fotmob.com/api/leagues?id=48"</span><span class="op">)</span> </span>
+<span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">jsonn</span><span class="op">$</span><span class="va">result</span><span class="op">$</span><span class="va">table</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">table</span><span class="op">$</span><span class="va">all</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note the <code>id=48</code> part at the end of the url. Change that to the desired competition code that you can find in the csv mentioned earlier.</p>
+</section><section id="join-tables" class="level3"><h3 class="anchored" data-anchor-id="join-tables">JOIN TABLES</h3>
+<p>Now we “just” have to join these three data frames together. We select the id column as well, as it makes it easy to add the club logo.</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-22_4466267e0f205ee2002bdba55ba619b3">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">xptable</span> <span class="op">&lt;-</span> <span class="va">table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">xpoints</span>, by<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span> <span class="op">=</span> <span class="st">"home_team"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">scoresStr</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GF"</span>, <span class="st">"GA"</span><span class="op">)</span>,<span class="st">"-"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>GF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">GF</span><span class="op">)</span>,</span>
+<span>         GA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">GA</span><span class="op">)</span>,</span>
+<span>         GD <span class="op">=</span> <span class="va">GF</span> <span class="op">-</span> <span class="va">GA</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">idx</span>,<span class="va">id</span>, <span class="va">name</span>, <span class="va">played</span>, <span class="va">wins</span>,<span class="va">draws</span>,<span class="va">losses</span>,<span class="va">GF</span>,<span class="va">GA</span>,<span class="va">GD</span>,<span class="va">pts</span>,<span class="va">xPoints</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="op">-</span><span class="va">xPoints</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>xRank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">table</span><span class="op">$</span><span class="va">name</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">xG_table</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span> <span class="op">=</span> <span class="st">"team_name"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>xGD <span class="op">=</span> <span class="va">xGF</span> <span class="op">-</span> <span class="va">xGA</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s arrange the table in the desired output.</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-24_a507b9a131d0a5210ba771bfa3a6c162">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">xptable</span> <span class="op">&lt;-</span> <span class="va">xptable</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">idx</span>,<span class="va">id</span>,<span class="va">name</span>,<span class="va">played</span>,<span class="va">wins</span>,<span class="va">draws</span>,<span class="va">losses</span>,<span class="va">GF</span>,<span class="va">GA</span>,<span class="va">GD</span>,<span class="va">pts</span>,<span class="va">xGF</span>,<span class="va">xGA</span>,<span class="va">xGD</span>,<span class="va">xPoints</span>,<span class="va">xRank</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">`colnames&lt;-`</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"RANK"</span>,<span class="st">"id"</span>, <span class="st">"TEAM"</span>, <span class="st">"P"</span>,<span class="st">"W"</span>,<span class="st">"D"</span>,<span class="st">"L"</span>,<span class="st">"GF"</span>,<span class="st">"GA"</span>,<span class="st">"GD"</span>,<span class="st">"PTS"</span>,<span class="st">"xGF"</span>,<span class="st">"xGA"</span>,<span class="st">"xGD"</span>,<span class="st">"xPTS"</span>,<span class="st">"xRANK"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The club logo’s can be found at the following url: <code>https://images.fotmob.com/image_resources/logo/teamlogo/{id}.png</code>. So we can change the column that has the id’s so that it will contain the url to the logo. This will make it super easy to add the logo to the table.</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-26_ef0d7108aa302f264159c06d94f01c78">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">xptable</span> <span class="op">&lt;-</span> <span class="va">xptable</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"https://images.fotmob.com/image_resources/logo/teamlogo/{id}.png"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The best way about this is that now the whole code is fool proof for every competition thtat FotMob has xG data for. Just change the name and competition code in a few functions and you’’ll get the table WITH the correct logo’s.</p>
+</section><section id="making-the-table" class="level3"><h3 class="anchored" data-anchor-id="making-the-table">MAKING THE TABLE</h3>
+<p>I use <a href="https://glin.github.io/reactable/">reactable</a> for the table on my site, as it is interactive. For this tutorial I’m using <a href="https://gt.rstudio.com/">gt</a> and <a href="https://github.com/jthomasmock/gtExtras">gtExtras</a> as those packages work great for static tables on websites. Just use the package you like the most. <a href="https://gt.rstudio.com/">Here you can find the documentation on <code>{gt}</code> and a lot of other packages to make tables.</a> Just pick the one you like the most. <a href="https://gt.rstudio.com/">gt</a> let’s you use HTML and <a href="https://themockup.blog/posts/2020-10-31-embedding-custom-features-in-gt-tables/#more-custom-html-work">I copied some code from the creator.</a></p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-28_338ac6e065251c35f0aba3265ee725b8">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/">gt</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">add_rank_color</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">col1</span>,<span class="va">col2</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">add_color</span> <span class="op">&lt;-</span> <span class="kw">if</span> <span class="op">(</span><span class="va">col1</span> <span class="op">&lt;</span> <span class="va">col2</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="st">"background:#61B861;"</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">col1</span><span class="op">&gt;</span><span class="va">col2</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="st">"background:#FC785F;"</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">col1</span> <span class="op">==</span> <span class="va">col2</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="st">"background:#FDD297;"</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">div_out</span> <span class="op">&lt;-</span> <span class="fu">htmltools</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html">div</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span></span>
+<span>      <span class="st">"width: 20px;</span></span>
+<span><span class="st">  height: 20px;</span></span>
+<span><span class="st">  border: 1px solid rgba(0, 0, 0, 0.03);</span></span>
+<span><span class="st">  border-radius: 50%;</span></span>
+<span><span class="st">text-align: center;</span></span>
+<span><span class="st">  align-item: right;</span></span>
+<span><span class="st">   margin-left: 15px;</span></span>
+<span><span class="st">#  color: #000;</span></span>
+<span><span class="st">  font-size: 13px;</span></span>
+<span><span class="st">      font-weight:bold;"</span>,</span>
+<span>      <span class="va">add_color</span></span>
+<span>    <span class="op">)</span>,<span class="va">col1</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">div_out</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html">html</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As I keep it simple/lazy, I just want to copy <a href="&quot;https://www.gettingbluefingers.com/rank&quot;">my xRank table</a> but with a <a href="https://gt.rstudio.com/">gt</a> instead of <a href="https://glin.github.io/reactable/">reactable</a>. The code is a bit messy as I normally keep my <a href="https://gt.rstudio.com/">gt</a> tables simpler.</p>
+<p>So the above function colours the ‘RANK’ and ‘xRANK’ column according to which of the two is better/worse. This is so that I can use it in the code below that creates the table. The function has some css in there as well.</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-30_f9f760ff640af722c0cc6086fb0ce100">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jthomasmock/gtExtras">gtExtras</a></span><span class="op">)</span></span>
+<span><span class="va">xptable</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    RANK_temp <span class="op">=</span> <span class="va">RANK</span>,</span>
+<span>    RANK <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span><span class="va">RANK</span>, <span class="va">xRANK</span>, <span class="va">add_rank_color</span><span class="op">)</span>,</span>
+<span>    xRANK <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span><span class="va">xRANK</span>, <span class="va">RANK_temp</span>, <span class="va">add_rank_color</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">RANK_temp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html">gt_img_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">id</span>, img_source <span class="op">=</span> <span class="st">"web"</span>, height <span class="op">=</span> <span class="fl">17</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label</a></span><span class="op">(</span></span>
+<span>    id <span class="op">=</span> <span class="st">" "</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">xGF</span>,<span class="va">xGA</span>,<span class="va">xGD</span>,<span class="va">xPTS</span><span class="op">)</span>,</span>
+<span>    decimals <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html">cols_align</a></span><span class="op">(</span></span>
+<span>    align <span class="op">=</span> <span class="st">"center"</span>,</span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">P</span><span class="op">:</span><span class="va">xRANK</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      </span>
+<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cell_borders.html">cell_borders</a></span><span class="op">(</span></span>
+<span>        sides <span class="op">=</span> <span class="st">"left"</span>,</span>
+<span>        color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>        weight <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>      </span>
+<span>    <span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html">cells_body</a></span><span class="op">(</span></span>
+<span>        columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">P</span>,<span class="va">xGF</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html">tab_spanner</a></span><span class="op">(</span></span>
+<span>    label <span class="op">=</span> <span class="st">"LEAGUE TABLE"</span>,</span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>      <span class="va">RANK</span><span class="op">:</span><span class="va">PTS</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html">tab_spanner</a></span><span class="op">(</span></span>
+<span>    label <span class="op">=</span> <span class="st">"EXPECTED TABLE"</span>,</span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>      <span class="va">xGF</span><span class="op">:</span><span class="va">xRANK</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_width.html">cols_width</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">xGF</span><span class="op">:</span><span class="va">xPTS</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">60</span><span class="op">)</span>,</span>
+<span>    <span class="co">#c(RANK,xRANK) ~ px(30),</span></span>
+<span>   <span class="va">TEAM</span> <span class="op">~</span> <span class="fl">150</span>,</span>
+<span>    <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_column_labels.html">cells_column_labels</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    style     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cell_borders.html">cell_borders</a></span><span class="op">(</span>sides <span class="op">=</span> <span class="st">"bottom"</span>, weight <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html">cells_body</a></span><span class="op">(</span></span>
+<span>        columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">PTS</span>,<span class="va">xPTS</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="st">"Roboto Mono"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html">tab_options</a></span><span class="op">(</span></span>
+<span>    row.striping.background_color <span class="op">=</span> <span class="st">"#F6F8FA"</span>,</span>
+<span>    row.striping.include_table_body <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    data_row.padding <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>    table.border.top.style <span class="op">=</span> <span class="st">"hidden"</span>,</span>
+<span>    <span class="co">#table.border.bottom.style = "hidden",</span></span>
+<span>    table.font.size <span class="op">=</span> <span class="st">"12px"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"**LEAGUE TABLE BASED ON EXPECTED POINTS**"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>   <span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html">tab_source_note</a></span><span class="op">(</span></span>
+<span>    source_note <span class="op">=</span> <span class="st">"xPoints calculated by simulating every shot in a match"</span></span>
+<span>  <span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>   <span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html">tab_source_note</a></span><span class="op">(</span></span>
+<span>    source_note <span class="op">=</span> <span class="st">"Data from Opta via FotMob"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="aqjosffnnh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: 'Roboto Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#aqjosffnnh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: hidden;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#aqjosffnnh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aqjosffnnh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#aqjosffnnh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#aqjosffnnh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aqjosffnnh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aqjosffnnh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#aqjosffnnh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#aqjosffnnh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#aqjosffnnh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#aqjosffnnh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#aqjosffnnh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#aqjosffnnh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#aqjosffnnh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#aqjosffnnh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#aqjosffnnh .gt_row {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#aqjosffnnh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aqjosffnnh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#aqjosffnnh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#aqjosffnnh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aqjosffnnh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#aqjosffnnh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#aqjosffnnh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aqjosffnnh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aqjosffnnh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#aqjosffnnh .gt_striped {
+  background-color: #F6F8FA;
+}
+
+#aqjosffnnh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aqjosffnnh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aqjosffnnh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aqjosffnnh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aqjosffnnh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aqjosffnnh .gt_left {
+  text-align: left;
+}
+
+#aqjosffnnh .gt_center {
+  text-align: center;
+}
+
+#aqjosffnnh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#aqjosffnnh .gt_font_normal {
+  font-weight: normal;
+}
+
+#aqjosffnnh .gt_font_bold {
+  font-weight: bold;
+}
+
+#aqjosffnnh .gt_font_italic {
+  font-style: italic;
+}
+
+#aqjosffnnh .gt_super {
+  font-size: 65%;
+}
+
+#aqjosffnnh .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#aqjosffnnh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#aqjosffnnh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#aqjosffnnh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#aqjosffnnh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#aqjosffnnh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#aqjosffnnh .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" style="table-layout: fixed;; width: 0px">
+<colgroup>
+<col style="width:50px;">
+<col style="width:50px;">
+<col style="width:150px;">
+<col style="width:50px;">
+<col style="width:50px;">
+<col style="width:50px;">
+<col style="width:50px;">
+<col style="width:50px;">
+<col style="width:50px;">
+<col style="width:50px;">
+<col style="width:50px;">
+<col style="width:60px;">
+<col style="width:60px;">
+<col style="width:60px;">
+<col style="width:60px;">
+<col style="width:50px;">
+</colgroup>
+<thead class="gt_header"><tr>
+<td colspan="16" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>LEAGUE TABLE BASED ON EXPECTED POINTS</strong></td>
+    </tr></thead>
+<thead class="gt_col_headings">
+<tr>
+<th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="11" scope="colgroup">
+        <span class="gt_column_spanner">LEAGUE TABLE</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="5" scope="colgroup">
+        <span class="gt_column_spanner">EXPECTED TABLE</span>
+      </th>
+    </tr>
+<tr>
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">RANK</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col"> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">TEAM</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">P</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">W</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">D</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">L</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">GF</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">GA</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">GD</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">PTS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">xGF</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">xGA</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">xGD</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">xPTS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-weight: bold;" scope="col">xRANK</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">3</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/9850.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Norwich City</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center">7</td>
+<td class="gt_row gt_center">3</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">21</td>
+<td class="gt_row gt_center">15</td>
+<td class="gt_row gt_center">6</td>
+<td class="gt_row gt_center" style="font-weight: bold;">24</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">20.4</td>
+<td class="gt_row gt_center">14.7</td>
+<td class="gt_row gt_center">5.7</td>
+<td class="gt_row gt_center" style="font-weight: bold;">23.6</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">1</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">20</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8659.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">West Bromwich Albion</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center gt_striped">2</td>
+<td class="gt_row gt_center gt_striped">8</td>
+<td class="gt_row gt_center gt_striped">4</td>
+<td class="gt_row gt_center gt_striped">19</td>
+<td class="gt_row gt_center gt_striped">18</td>
+<td class="gt_row gt_center gt_striped">1</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">14</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">19.8</td>
+<td class="gt_row gt_center gt_striped">14.4</td>
+<td class="gt_row gt_center gt_striped">5.4</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">23.2</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">2</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">22</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8549.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Middlesbrough</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center">3</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">7</td>
+<td class="gt_row gt_center">15</td>
+<td class="gt_row gt_center">20</td>
+<td class="gt_row gt_center">-5</td>
+<td class="gt_row gt_center" style="font-weight: bold;">13</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">18.2</td>
+<td class="gt_row gt_center">13.2</td>
+<td class="gt_row gt_center">5.0</td>
+<td class="gt_row gt_center" style="font-weight: bold;">23.0</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">3</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">2</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8657.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Sheffield United</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center gt_striped">7</td>
+<td class="gt_row gt_center gt_striped">4</td>
+<td class="gt_row gt_center gt_striped">3</td>
+<td class="gt_row gt_center gt_striped">24</td>
+<td class="gt_row gt_center gt_striped">13</td>
+<td class="gt_row gt_center gt_striped">11</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">25</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">21.4</td>
+<td class="gt_row gt_center gt_striped">13.2</td>
+<td class="gt_row gt_center gt_striped">8.1</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">23.0</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">4</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">7</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8346.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Luton Town</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center">6</td>
+<td class="gt_row gt_center">3</td>
+<td class="gt_row gt_center">19</td>
+<td class="gt_row gt_center">14</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center" style="font-weight: bold;">21</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">17.2</td>
+<td class="gt_row gt_center">12.4</td>
+<td class="gt_row gt_center">4.8</td>
+<td class="gt_row gt_center" style="font-weight: bold;">22.6</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">5</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">1</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8191.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Burnley</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center gt_striped">6</td>
+<td class="gt_row gt_center gt_striped">7</td>
+<td class="gt_row gt_center gt_striped">1</td>
+<td class="gt_row gt_center gt_striped">24</td>
+<td class="gt_row gt_center gt_striped">12</td>
+<td class="gt_row gt_center gt_striped">12</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">25</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">17.5</td>
+<td class="gt_row gt_center gt_striped">14.0</td>
+<td class="gt_row gt_center gt_striped">3.5</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">21.9</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">6</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">10</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/9817.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Watford</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">19</td>
+<td class="gt_row gt_center">17</td>
+<td class="gt_row gt_center">2</td>
+<td class="gt_row gt_center" style="font-weight: bold;">20</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">17.1</td>
+<td class="gt_row gt_center">14.5</td>
+<td class="gt_row gt_center">2.6</td>
+<td class="gt_row gt_center" style="font-weight: bold;">21.0</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">7</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">15</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8528.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Wigan Athletic</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center gt_striped">5</td>
+<td class="gt_row gt_center gt_striped">4</td>
+<td class="gt_row gt_center gt_striped">5</td>
+<td class="gt_row gt_center gt_striped">15</td>
+<td class="gt_row gt_center gt_striped">18</td>
+<td class="gt_row gt_center gt_striped">-3</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">19</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">16.7</td>
+<td class="gt_row gt_center gt_striped">14.7</td>
+<td class="gt_row gt_center gt_striped">2.0</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">20.3</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">8</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">8</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/10003.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Swansea City</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center">6</td>
+<td class="gt_row gt_center">3</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center">17</td>
+<td class="gt_row gt_center">20</td>
+<td class="gt_row gt_center">-3</td>
+<td class="gt_row gt_center" style="font-weight: bold;">21</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">17.0</td>
+<td class="gt_row gt_center">15.6</td>
+<td class="gt_row gt_center">1.4</td>
+<td class="gt_row gt_center" style="font-weight: bold;">20.2</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">9</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">11</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/10004.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Millwall</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center gt_striped">6</td>
+<td class="gt_row gt_center gt_striped">2</td>
+<td class="gt_row gt_center gt_striped">6</td>
+<td class="gt_row gt_center gt_striped">17</td>
+<td class="gt_row gt_center gt_striped">18</td>
+<td class="gt_row gt_center gt_striped">-1</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">20</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">17.8</td>
+<td class="gt_row gt_center gt_striped">17.2</td>
+<td class="gt_row gt_center gt_striped">0.6</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">19.9</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">10</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">6</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/9798.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Reading</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center">7</td>
+<td class="gt_row gt_center">1</td>
+<td class="gt_row gt_center">6</td>
+<td class="gt_row gt_center">15</td>
+<td class="gt_row gt_center">20</td>
+<td class="gt_row gt_center">-5</td>
+<td class="gt_row gt_center" style="font-weight: bold;">22</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">15.2</td>
+<td class="gt_row gt_center">14.6</td>
+<td class="gt_row gt_center">0.6</td>
+<td class="gt_row gt_center" style="font-weight: bold;">19.9</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">11</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">4</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/10172.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Queens Park Rangers</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center gt_striped">7</td>
+<td class="gt_row gt_center gt_striped">3</td>
+<td class="gt_row gt_center gt_striped">4</td>
+<td class="gt_row gt_center gt_striped">20</td>
+<td class="gt_row gt_center gt_striped">16</td>
+<td class="gt_row gt_center gt_striped">4</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">24</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">16.3</td>
+<td class="gt_row gt_center gt_striped">15.8</td>
+<td class="gt_row gt_center gt_striped">0.4</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">19.5</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">12</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">9</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8472.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Sunderland</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">19</td>
+<td class="gt_row gt_center">14</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center" style="font-weight: bold;">20</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">15.0</td>
+<td class="gt_row gt_center">15.3</td>
+<td class="gt_row gt_center">−0.3</td>
+<td class="gt_row gt_center" style="font-weight: bold;">18.8</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">13</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">12</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8658.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Birmingham City</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center gt_striped">5</td>
+<td class="gt_row gt_center gt_striped">4</td>
+<td class="gt_row gt_center gt_striped">5</td>
+<td class="gt_row gt_center gt_striped">14</td>
+<td class="gt_row gt_center gt_striped">12</td>
+<td class="gt_row gt_center gt_striped">2</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">19</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">15.2</td>
+<td class="gt_row gt_center gt_striped">17.6</td>
+<td class="gt_row gt_center gt_striped">−2.4</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">18.5</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">14</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">17</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8427.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Bristol City</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">15</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center">3</td>
+<td class="gt_row gt_center">7</td>
+<td class="gt_row gt_center">23</td>
+<td class="gt_row gt_center">24</td>
+<td class="gt_row gt_center">-1</td>
+<td class="gt_row gt_center" style="font-weight: bold;">18</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">18.6</td>
+<td class="gt_row gt_center">21.8</td>
+<td class="gt_row gt_center">−3.3</td>
+<td class="gt_row gt_center" style="font-weight: bold;">18.3</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">15</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">5</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8655.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Blackburn Rovers</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">15</td>
+<td class="gt_row gt_center gt_striped">8</td>
+<td class="gt_row gt_center gt_striped">0</td>
+<td class="gt_row gt_center gt_striped">7</td>
+<td class="gt_row gt_center gt_striped">18</td>
+<td class="gt_row gt_center gt_striped">17</td>
+<td class="gt_row gt_center gt_striped">1</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">24</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14.4</td>
+<td class="gt_row gt_center gt_striped">18.2</td>
+<td class="gt_row gt_center gt_striped">−3.9</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">18.3</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">16</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">14</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8411.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Preston North End</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">15</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">7</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">8</td>
+<td class="gt_row gt_center">10</td>
+<td class="gt_row gt_center">-2</td>
+<td class="gt_row gt_center" style="font-weight: bold;">19</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14.6</td>
+<td class="gt_row gt_center">17.2</td>
+<td class="gt_row gt_center">−2.5</td>
+<td class="gt_row gt_center" style="font-weight: bold;">17.9</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">17</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FDD297;">18</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8344.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Cardiff City</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center gt_striped">5</td>
+<td class="gt_row gt_center gt_striped">3</td>
+<td class="gt_row gt_center gt_striped">6</td>
+<td class="gt_row gt_center gt_striped">12</td>
+<td class="gt_row gt_center gt_striped">14</td>
+<td class="gt_row gt_center gt_striped">-2</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">18</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">13.7</td>
+<td class="gt_row gt_center gt_striped">13.9</td>
+<td class="gt_row gt_center gt_striped">−0.2</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">17.7</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FDD297;">18</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">13</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/10194.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Stoke City</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">5</td>
+<td class="gt_row gt_center">17</td>
+<td class="gt_row gt_center">17</td>
+<td class="gt_row gt_center">0</td>
+<td class="gt_row gt_center" style="font-weight: bold;">19</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">16.1</td>
+<td class="gt_row gt_center">19.0</td>
+<td class="gt_row gt_center">−2.9</td>
+<td class="gt_row gt_center" style="font-weight: bold;">17.5</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">19</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">19</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8483.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Blackpool</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center gt_striped">4</td>
+<td class="gt_row gt_center gt_striped">4</td>
+<td class="gt_row gt_center gt_striped">6</td>
+<td class="gt_row gt_center gt_striped">16</td>
+<td class="gt_row gt_center gt_striped">20</td>
+<td class="gt_row gt_center gt_striped">-4</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">16</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">16.4</td>
+<td class="gt_row gt_center gt_striped">21.9</td>
+<td class="gt_row gt_center gt_striped">−5.5</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">15.7</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">20</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">16</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8119.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Rotherham United</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">13</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">6</td>
+<td class="gt_row gt_center">3</td>
+<td class="gt_row gt_center">15</td>
+<td class="gt_row gt_center">13</td>
+<td class="gt_row gt_center">2</td>
+<td class="gt_row gt_center" style="font-weight: bold;">18</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14.1</td>
+<td class="gt_row gt_center">17.3</td>
+<td class="gt_row gt_center">−3.2</td>
+<td class="gt_row gt_center" style="font-weight: bold;">15.4</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">21</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">24</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8669.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Coventry City</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">11</td>
+<td class="gt_row gt_center gt_striped">2</td>
+<td class="gt_row gt_center gt_striped">4</td>
+<td class="gt_row gt_center gt_striped">5</td>
+<td class="gt_row gt_center gt_striped">9</td>
+<td class="gt_row gt_center gt_striped">14</td>
+<td class="gt_row gt_center gt_striped">-5</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">10</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">12.9</td>
+<td class="gt_row gt_center gt_striped">14.8</td>
+<td class="gt_row gt_center gt_striped">−1.9</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">13.5</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">22</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FDD297;">23</div></td>
+<td class="gt_row gt_center"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/9796.png" style="height:17px;"></td>
+<td class="gt_row gt_left">Huddersfield Town</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">13</td>
+<td class="gt_row gt_center">3</td>
+<td class="gt_row gt_center">2</td>
+<td class="gt_row gt_center">8</td>
+<td class="gt_row gt_center">16</td>
+<td class="gt_row gt_center">21</td>
+<td class="gt_row gt_center">-5</td>
+<td class="gt_row gt_center" style="font-weight: bold;">11</td>
+<td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14.1</td>
+<td class="gt_row gt_center">19.4</td>
+<td class="gt_row gt_center">−5.3</td>
+<td class="gt_row gt_center" style="font-weight: bold;">13.4</td>
+<td class="gt_row gt_center"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FDD297;">23</div></td>
+</tr>
+<tr>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#61B861;">21</div></td>
+<td class="gt_row gt_center gt_striped"><img src="https://images.fotmob.com/image_resources/logo/teamlogo/8667.png" style="height:17px;"></td>
+<td class="gt_row gt_left gt_striped">Hull City</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">14</td>
+<td class="gt_row gt_center gt_striped">4</td>
+<td class="gt_row gt_center gt_striped">2</td>
+<td class="gt_row gt_center gt_striped">8</td>
+<td class="gt_row gt_center gt_striped">13</td>
+<td class="gt_row gt_center gt_striped">28</td>
+<td class="gt_row gt_center gt_striped">-15</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">14</td>
+<td class="gt_row gt_center gt_striped" style="border-left-width: 3px; border-left-style: solid; border-left-color: black;">13.8</td>
+<td class="gt_row gt_center gt_striped">22.6</td>
+<td class="gt_row gt_center gt_striped">−8.9</td>
+<td class="gt_row gt_center gt_striped" style="font-weight: bold;">12.5</td>
+<td class="gt_row gt_center gt_striped"><div style="width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+text-align: center;
+  align-item: right;
+   margin-left: 15px;
+#  color: #000;
+  font-size: 13px;
+      font-weight:bold; background:#FC785F;">24</div></td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes">
+<tr>
+<td class="gt_sourcenote" colspan="16">xPoints calculated by simulating every shot in a match</td>
+    </tr>
+<tr>
+<td class="gt_sourcenote" colspan="16">Data from Opta via FotMob</td>
+    </tr>
+</tfoot>
+</table>
+</div>
+</div>
+</div>
+</section><section id="some-notes" class="level3"><h3 class="anchored" data-anchor-id="some-notes">SOME NOTES</h3>
+<p>As FotMob only has the minute for every shot, it is impossible to take rebounds into account. So if a team has two consecutive shots the xG is just summed up instead of first being factored with each other. This will skew some results, but I think it’s a small error and every team will profit/be disadvantaged by it in the long run.</p>
+<p>Another point is that gamestate will be a big factor in these calculations. If you’re playing to just score and sit back, the opponent will gather more xG in most cases till they score the equalizer. After that it’s probably fair game again, but the results are skewed a little. If the equalizer comes earlier, I think the current gamestate is just as fair but the xG and therefore xPoints are much lower.</p>
+
+
+</section></main><!-- /main --><div>
+<hr>
+<h3> Support my work with a coffee </h3>
+
+<script type="text/javascript" src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script><script type="text/javascript">kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'X8X05VG5Z');kofiwidget2.draw();</script><h3> Share </h3>
+
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-hashtags="#rstats" data-show-count="false">Tweet</a><script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><hr>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><script src="https://utteranc.es/client.js" repo="RobinKoetsier/site_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

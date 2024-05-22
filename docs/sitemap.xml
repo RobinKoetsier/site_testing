@@ -1,39 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.gettingbluefingers.com/posts/welcome/index.html</loc>
-    <lastmod>2022-09-30T20:17:51.302Z</lastmod>
+    <loc>https://www.gettingbluefingers.com/passes.html</loc>
+    <lastmod>2024-05-22T14:01:37.302Z</lastmod>
   </url>
   <url>
-    <loc>https://www.gettingbluefingers.com/Other_pages/Shots.html</loc>
-    <lastmod>2022-09-30T20:18:00.420Z</lastmod>
+    <loc>https://www.gettingbluefingers.com/rank.html</loc>
+    <lastmod>2024-05-22T14:01:17.666Z</lastmod>
   </url>
   <url>
-    <loc>https://www.gettingbluefingers.com/Other_pages/rank.html</loc>
-    <lastmod>2022-09-30T20:18:04.974Z</lastmod>
+    <loc>https://www.gettingbluefingers.com/matches.html</loc>
+    <lastmod>2024-05-22T14:01:05.881Z</lastmod>
   </url>
   <url>
-    <loc>https://www.gettingbluefingers.com/Work.html</loc>
-    <lastmod>2022-09-30T20:18:05.722Z</lastmod>
+    <loc>https://www.gettingbluefingers.com/rank2.html</loc>
+    <lastmod>2024-05-22T13:59:30.564Z</lastmod>
   </url>
   <url>
-    <loc>https://www.gettingbluefingers.com/index.html</loc>
-    <lastmod>2022-09-30T20:18:06.248Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.gettingbluefingers.com/Stuff/Podcasts.html</loc>
-    <lastmod>2022-09-30T20:18:06.742Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.gettingbluefingers.com/about.html</loc>
-    <lastmod>2022-09-30T20:18:07.190Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.gettingbluefingers.com/Schoten.html</loc>
-    <lastmod>2022-09-30T20:18:15.815Z</lastmod>
+    <loc>https://www.gettingbluefingers.com/tutorials/RadarPizzaChart/index.html</loc>
+    <lastmod>2024-05-22T13:59:25.701Z</lastmod>
   </url>
   <url>
     <loc>https://www.gettingbluefingers.com/posts.html</loc>
-    <lastmod>2022-09-30T20:18:16.302Z</lastmod>
+    <lastmod>2024-05-22T13:59:11.811Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/Opponent.html</loc>
+    <lastmod>2024-05-22T13:59:06.124Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/tutorials.html</loc>
+    <lastmod>2024-05-22T13:59:00.588Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/2021-12-23_PSV/index.html</loc>
+    <lastmod>2024-05-22T13:58:57.429Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/Roda.html</loc>
+    <lastmod>2024-05-22T13:58:47.842Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/stuff/podcasts/index.html</loc>
+    <lastmod>2024-05-22T13:58:46.598Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/index.html</loc>
+    <lastmod>2024-05-22T13:58:44.762Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/Shots.html</loc>
+    <lastmod>2024-05-22T13:58:42.712Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/passesKKD.html</loc>
+    <lastmod>2024-05-22T13:58:33.843Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/dia.html</loc>
+    <lastmod>2024-05-22T13:58:22.034Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index.html</loc>
+    <lastmod>2024-05-22T13:58:20.973Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/passesfeb.html</loc>
+    <lastmod>2024-05-22T13:58:17.672Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/stuff.html</loc>
+    <lastmod>2024-05-22T13:58:09.727Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/index.html</loc>
+    <lastmod>2024-05-22T13:58:19.261Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/index.html</loc>
+    <lastmod>2024-05-22T13:58:21.581Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/Work.html</loc>
+    <lastmod>2024-05-22T13:58:34.385Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/me.html</loc>
+    <lastmod>2024-05-22T13:58:43.216Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/stuff/twitter/index.html</loc>
+    <lastmod>2024-05-22T13:58:46.116Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/about.html</loc>
+    <lastmod>2024-05-22T13:58:47.107Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/shotsfeb.html</loc>
+    <lastmod>2024-05-22T13:58:55.784Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/d3/sim/index.html</loc>
+    <lastmod>2024-05-22T13:58:59.876Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/rankfeb.html</loc>
+    <lastmod>2024-05-22T13:59:05.216Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/Schoten.html</loc>
+    <lastmod>2024-05-22T13:59:09.585Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/tutorials/2022-10-18_xpoints-table/index.html</loc>
+    <lastmod>2024-05-22T13:59:24.430Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/tutorials/2022-10-10_shot-areas/index.html</loc>
+    <lastmod>2024-05-22T13:59:26.766Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/ShotsKKD.html</loc>
+    <lastmod>2024-05-22T13:59:42.014Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/shinylivetest.html</loc>
+    <lastmod>2024-05-22T14:01:12.389Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.gettingbluefingers.com/rankKKD.html</loc>
+    <lastmod>2024-05-22T14:01:25.169Z</lastmod>
   </url>
 </urlset>

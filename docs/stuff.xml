@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Getting Blue Fingers</title>
+<link>https://www.gettingbluefingers.com/stuff.html</link>
+<atom:link href="https://www.gettingbluefingers.com/stuff.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.3.450</generator>
+<lastBuildDate>Wed, 22 May 2024 13:58:09 GMT</lastBuildDate>
+<item>
+  <title>Twitter</title>
+  <link>https://www.gettingbluefingers.com/stuff/twitter/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<hr>
+<p>Besides my personal Twitter profile, I also made a bot to post a dashboard every Eredivisie game. This was mostly to teach myself some more coding. You can see both accounts here.</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p></p><div id="tweet-38545"></div><script>tweet={"url":"https:\/\/twitter.com\/RobinWilhelmus\/status\/1387030162366255104","author_name":"Robin","author_url":"https:\/\/twitter.com\/RobinWilhelmus","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E\uD83C\uDF55Pizza Charts in R\uD83C\uDF55\u003Cbr\u003EI made a tutorial for creating the pizza charts from mplsoccer\/\u003Ca href=\"https:\/\/twitter.com\/Worville?ref_src=twsrc%5Etfw\"\u003E@Worville\u003C\/a\u003E  \/\u003Ca href=\"https:\/\/twitter.com\/FootballSlices?ref_src=twsrc%5Etfw\"\u003E@FootballSlices\u003C\/a\u003E yourself! \u003Cbr\u003EEasy to reproduce and just as easy to make your own style!\u003Cbr\u003E\u003Cbr\u003Echeck: \u003Ca href=\"https:\/\/t.co\/owF0rJblBx\"\u003Ehttps:\/\/t.co\/owF0rJblBx\u003C\/a\u003E\u003Cbr\u003E\u003Cbr\u003EFeedback\/retweets much appreciated.\u003Ca href=\"https:\/\/twitter.com\/hashtag\/rstats?src=hash&amp;ref_src=twsrc%5Etfw\"\u003E#rstats\u003C\/a\u003E \u003Ca href=\"https:\/\/twitter.com\/hashtag\/ggplot?src=hash&amp;ref_src=twsrc%5Etfw\"\u003E#ggplot\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/GWm5hi9d0A\"\u003Epic.twitter.com\/GWm5hi9d0A\u003C\/a\u003E\u003C\/p\u003E&mdash; Robin (@RobinWilhelmus) \u003Ca href=\"https:\/\/twitter.com\/RobinWilhelmus\/status\/1387030162366255104?ref_src=twsrc%5Etfw\"\u003EApril 27, 2021\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-38545").innerHTML = tweet["html"];</script><p></p>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<p></p><div id="tweet-31513"></div><script>tweet={"url":"https:\/\/twitter.com\/EredivisiePlots\/status\/1571511765820907520","author_name":"Eredivisieplots","author_url":"https:\/\/twitter.com\/EredivisiePlots","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"nl\" dir=\"ltr\"\u003EMatch Dashboard PSV Eindhoven - Feyenoord\u003Ca href=\"https:\/\/twitter.com\/hashtag\/PSVFey?src=hash&amp;ref_src=twsrc%5Etfw\"\u003E#PSVFey\u003C\/a\u003E \u003Ca href=\"https:\/\/twitter.com\/hashtag\/Eredivisie?src=hash&amp;ref_src=twsrc%5Etfw\"\u003E#Eredivisie\u003C\/a\u003E \u003Ca href=\"https:\/\/twitter.com\/hashtag\/xG?src=hash&amp;ref_src=twsrc%5Etfw\"\u003E#xG\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/7dwyWOLVGy\"\u003Epic.twitter.com\/7dwyWOLVGy\u003C\/a\u003E\u003C\/p\u003E&mdash; Eredivisieplots (@EredivisiePlots) \u003Ca href=\"https:\/\/twitter.com\/EredivisiePlots\/status\/1571511765820907520?ref_src=twsrc%5Etfw\"\u003ESeptember 18, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-31513").innerHTML = tweet["html"];</script><p></p>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <guid>https://www.gettingbluefingers.com/stuff/twitter/index.html</guid>
+  <pubDate>Wed, 22 May 2024 13:58:09 GMT</pubDate>
+  <media:content url="https://www.gettingbluefingers.com/stuff/twitter/img/logo.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Podcasts</title>
+  <link>https://www.gettingbluefingers.com/stuff/podcasts/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>I’m in the monthly Dutch football podcast from ‘Tussen de linies’. You can check the latest episode here:</p>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/4AKaBJxyPpMbLhdIdUESdE?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+</iframe>
+<p>All episodes:</p>
+<p> <a href="https://open.spotify.com/show/6cSujEBBISBaUUc5POnjtx?si=JLCg-ABQRB-2DQ3JxDz54w&amp;nd=1">Spotify</a></p>
+<p> <a href="https://podcasts.apple.com/nl/podcast/tussen-de-linies-de-podcast/id1634794641">Apple Music</a></p>
+<p>Besides that, I was also in one episode of the ‘Showkeepers Podcast’ (also in Dutch)</p>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/6xTmyaz2ZmtaDPA46TSWCf?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+</iframe>
+
+
+
+ ]]></description>
+  <guid>https://www.gettingbluefingers.com/stuff/podcasts/index.html</guid>
+  <pubDate>Wed, 22 May 2024 13:58:09 GMT</pubDate>
+  <media:content url="https://www.gettingbluefingers.com/stuff/podcasts/img/logo.jpg" medium="image" type="image/jpeg"/>
+</item>
+</channel>
+</rss>

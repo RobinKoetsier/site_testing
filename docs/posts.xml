@@ -9,28 +9,475 @@
 <link>https://www.gettingbluefingers.com/posts.html</link>
 <atom:link href="https://www.gettingbluefingers.com/posts.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.1.251</generator>
-<lastBuildDate>Sat, 24 Sep 2022 22:00:00 GMT</lastBuildDate>
+<generator>quarto-1.3.450</generator>
+<lastBuildDate>Fri, 22 Dec 2023 23:00:00 GMT</lastBuildDate>
 <item>
-  <title>Welcome To My Blog</title>
-  <dc:creator>Tristan O'Malley</dc:creator>
-  <link>https://www.gettingbluefingers.com/posts/welcome/index.html</link>
+  <title>How insane is PSV?</title>
+  <dc:creator>Robin Koetsier</dc:creator>
+  <link>https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index.html</link>
   <description><![CDATA[ 
 
 
 
+<section id="intro" class="level2">
+<h2 class="anchored" data-anchor-id="intro">Intro</h2>
+<p>PSV has won its first 16 games of the season, and not at all undeserved. How special is this achievement? And who stands out in this team? In this post I’m going to look at the underlying numbers of their so far perfect season and compare some stuff to previous seasons and Eredivisie records. It’s a lot of vizualizations I found interesting</p>
+</section>
+<section id="previous-seasons" class="level2">
+<h2 class="anchored" data-anchor-id="previous-seasons">Previous seasons</h2>
+<section id="points" class="level3">
+<h3 class="anchored" data-anchor-id="points">Points</h3>
+<p>Since the Eredivisie gives you three points for a win, the best team after 16 games was <a href="https://nl.wikipedia.org/wiki/PSV_in_het_seizoen_2018/19_(mannen)" target="_blank">PSV 18/19</a>. They only lost to Feyenoord in their first 16 games, giving them 45 points at this stage in the season. Suprisingly enough, they didn’t win the title, as they finished 2nd, three points behind Ajax after losing their spot at the top of the table after match day 29. PSV Finished that season with 83 points.</p>
+<p>If we recalculate older seasons to the three points per win rule, <a href="https://nl.wikipedia.org/wiki/Eredivisie_1969/70" target="_blank">Ajax 69/70</a> also got 45 points and they only lost to Feyenoord as well.</p>
+<table class="table">
+<caption>Teams with the most points in one season</caption>
+<colgroup>
+<col style="width: 4%">
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nr.</th>
+<th>Club</th>
+<th>Season</th>
+<th>Pos</th>
+<th>W</th>
+<th>D</th>
+<th>L</th>
+<th>Pts</th>
+<th>Gf</th>
+<th>Ga</th>
+<th>Gd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.</td>
+<td>Ajax</td>
+<td>1971/72</td>
+<td>1</td>
+<td>30</td>
+<td>3</td>
+<td>1</td>
+<td>93</td>
+<td>104</td>
+<td>20</td>
+<td>+84</td>
+</tr>
+<tr class="even">
+<td>2.</td>
+<td>Ajax</td>
+<td>1972/73</td>
+<td>1</td>
+<td>30</td>
+<td>0</td>
+<td>4</td>
+<td>90</td>
+<td>102</td>
+<td>18</td>
+<td>+84</td>
+</tr>
+<tr class="odd">
+<td>3.</td>
+<td>Ajax</td>
+<td>1997/98</td>
+<td>1</td>
+<td>29</td>
+<td>2</td>
+<td>3</td>
+<td>89</td>
+<td>112</td>
+<td>22</td>
+<td>+90</td>
+</tr>
+<tr class="even">
+<td>4.</td>
+<td>Ajax</td>
+<td>1994/95</td>
+<td>1</td>
+<td>27</td>
+<td>7</td>
+<td>0</td>
+<td>88</td>
+<td>101</td>
+<td>30</td>
+<td>+71</td>
+</tr>
+<tr class="odd">
+<td>4.</td>
+<td>PSV</td>
+<td>2014/15</td>
+<td>1</td>
+<td>29</td>
+<td>1</td>
+<td>4</td>
+<td>88</td>
+<td>92</td>
+<td>31</td>
+<td>+61</td>
+</tr>
+<tr class="even">
+<td>4.</td>
+<td>Ajax</td>
+<td>2020/21</td>
+<td>1</td>
+<td>28</td>
+<td>4</td>
+<td>2</td>
+<td>88</td>
+<td>102</td>
+<td>23</td>
+<td>+79</td>
+</tr>
+</tbody>
+</table>
+<p>As you can see in the above table, only <a href="https://en.wikipedia.org/wiki/1997%E2%80%9398_AFC_Ajax_season" target="_blank">Ajax 97/98</a>, <a href="https://nl.wikipedia.org/wiki/PSV_in_het_seizoen_2014/15_(mannen)#Eredivisie" target="_blank">PSV 14/15</a> and <a href="https://nl.wikipedia.org/wiki/AFC_Ajax_in_het_seizoen_2020/21_(mannen)" target="_blank">Ajax 20/21</a> finished with more than 87 points since the rule chance. Personally I’m not a fan of recalculating point totals with the new rule, but included them in the table to be complete. <a href="https://nl.wikipedia.org/wiki/AFC_Ajax_in_het_seizoen_1971/72" target="_blank">Ajax 71/71</a> was insane on many levels and <a href="https://en.wikipedia.org/wiki/1994%E2%80%9395_AFC_Ajax_season" target="_blank">Ajax 94/95</a> finished the season without losing a game, which is still unmatched. <a href="https://nl.wikipedia.org/wiki/PSV_in_het_seizoen_2014/15_(mannen)" target="_blank">PSV 14/15</a> won the league with 17 points more than number 2 Ajax.</p>
+<p>PSV is on track to get 102 points, which would of course be a new record. The chance that this will happen is small, but a new record should be possible.</p>
+</section>
+<section id="goals" class="level3">
+<h3 class="anchored" data-anchor-id="goals">Goals</h3>
+<p>Not only in points, but also in goals they are unstoppable. They scored 56 goals already. The three most scoring teams after 16 matches (again, since 95/96) are <a href="https://nl.wikipedia.org/wiki/PSV_in_het_seizoen_2018/19_(mannen)" target="_blank">PSV</a> and <a href="https://nl.wikipedia.org/wiki/AFC_Ajax_in_het_seizoen_2018/19_(mannen)" target="_blank">Ajax</a> in 18/19 and <a href="https://nl.wikipedia.org/wiki/AFC_Ajax_in_het_seizoen_2020/21_(mannen)" target="_blank">Ajax in 20/21</a>, all three with 57 goals. The <a href="https://nl.wikipedia.org/wiki/Eredivisie_2018/19_(mannenvoetbal)" target="_blank">18/19 season</a> was something else for those two teams, as you can see.</p>
+<p>If we look at all Eredivisie seasons we can also include <a href="https://nl.wikipedia.org/wiki/Eredivisie_1960/61" target="_blank">Feyenoord 60/61</a> (62 goals), <a href="https://nl.wikipedia.org/wiki/PSV_in_het_seizoen_1987/88" target="_blank">PSV 87/88</a> (60), <a href="https://nl.wikipedia.org/wiki/Eredivisie_1966/67" target="_blank">Ajax 66/67</a> (58) and <a href="https://nl.wikipedia.org/wiki/Eredivisie_1974/75" target="_blank">Feyenoord 74/75</a> (58).</p>
+<table class="table">
+<caption>Teams with the most goal in one season</caption>
+<colgroup>
+<col style="width: 4%">
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nr.</th>
+<th>Club</th>
+<th>Season</th>
+<th>Pos</th>
+<th>W</th>
+<th>D</th>
+<th>L</th>
+<th>Pts</th>
+<th>Gf</th>
+<th>Ga</th>
+<th>Gd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.</td>
+<td>Ajax</td>
+<td>1966/67</td>
+<td>1</td>
+<td>26</td>
+<td>4</td>
+<td>4</td>
+<td>82</td>
+<td>122</td>
+<td>34</td>
+<td>+88</td>
+</tr>
+<tr class="even">
+<td>2.</td>
+<td>Ajax</td>
+<td>1985/86</td>
+<td>2</td>
+<td>25</td>
+<td>2</td>
+<td>7</td>
+<td>77</td>
+<td>120</td>
+<td>35</td>
+<td>+85</td>
+</tr>
+<tr class="odd">
+<td>3.</td>
+<td>Ajax</td>
+<td>2018/19</td>
+<td>1</td>
+<td>28</td>
+<td>2</td>
+<td>4</td>
+<td>86</td>
+<td>119</td>
+<td>32</td>
+<td>+87</td>
+</tr>
+<tr class="even">
+<td>4.</td>
+<td>Ajax</td>
+<td>1981/82</td>
+<td>1</td>
+<td>26</td>
+<td>4</td>
+<td>4</td>
+<td>82</td>
+<td>117</td>
+<td>42</td>
+<td>+75</td>
+</tr>
+<tr class="odd">
+<td>4.</td>
+<td>PSV</td>
+<td>1987/88</td>
+<td>1</td>
+<td>27</td>
+<td>5</td>
+<td>2</td>
+<td>86</td>
+<td>117</td>
+<td>28</td>
+<td>+89</td>
+</tr>
+</tbody>
+</table>
+<p>PSV is on track to score 119 goals, which would make them on par with <a href="https://nl.wikipedia.org/wiki/AFC_Ajax_in_het_seizoen_2018/19_(mannen)" target="_blank">Ajax 18/19</a> in 3rd spot.</p>
+<p>None of the teams with the most points are the teams with the most goals scored in one season. Will PSV get in both rankings at the end of the season?</p>
+</section>
+<section id="xg-timeline" class="level3">
+<h3 class="anchored" data-anchor-id="xg-timeline">xG Timeline</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>As you can see, PSV mainly improved their attacking output which results in an NPxG difference of 2.29 per game. This is (of course) the best xG difference of the league. We will look at the other teams later.</p>
+<p>PSV 22/23 came also close to this at the start of their season, but they played FC Volendam, Go Ahead Eagles, FC Emmen and Excelsior as their first four games (teams they absolutely crushed, by the way). This season they played every team except Excelsior.</p>
+</section>
+</section>
+<section id="this-season" class="level2">
+<h2 class="anchored" data-anchor-id="this-season">This season</h2>
+<section id="team-data" class="level3">
+<h3 class="anchored" data-anchor-id="team-data">Team data</h3>
+<p>Winning all your games is difficult, especially when there normally is a game where you produce a lot of xG without scoring (more than your opponent). Willem II against PSV 21/22 comes to mind… And even this season, the game against Vitesse could easily been different than a win.</p>
+<section id="total-xg" class="level4">
+<h4 class="anchored" data-anchor-id="total-xg">Total xG</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>If we look at their NPxG, we see that they score close to expectations. So they are just that good in attack. They are not lucky with finishing their chances over the long run.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="xg-difference" class="level4">
+<h4 class="anchored" data-anchor-id="xg-difference">xG Difference</h4>
+<p>PSV xG difference is (as I mentioned before) the best of the league. Only Feyenoord comes a little close, but PSV’s attacking numbers are in a world of their own.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+</section>
+<section id="scoring-goals" class="level4">
+<h4 class="anchored" data-anchor-id="scoring-goals">Scoring goals</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The chance at scoring 56 goals from their xG is around 5%. That’s a small number but we should look at the bigger picture. Scoring 56 goals <strong>or more</strong> has a chance of around 23%. Scoring between 50 and 60 goals: 55%</p>
+</section>
+<section id="conceding-goals" class="level4">
+<h4 class="anchored" data-anchor-id="conceding-goals">Conceding goals</h4>
+<p>According to their xG against they should have conceded more goals than the six they did. As you can see, six goals is very unlikely. Even conceding less than ten goals only has a chance of less than 5%. They should have conceded somewhere around 14 or 15 goals. Are they lucky in that regard, or is there something else?</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We will take a look at this later when we investigate some Benitez data.</p>
+</section>
+<section id="xg-per-game" class="level4">
+<h4 class="anchored" data-anchor-id="xg-per-game">xG Per game</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Above you can see the xG PSV created (top row) and conceded (bottom) for every match this season. The games where they conceded the most xG were the games against the two teams that were in a crisis (Ajax) or would soon be (Vitesse). In the game versus Vitesse they had a penalty which means their NPxG was lower than Vitesse’s. The other games they won with more NPxG than their opponent. So like I said early, they deserve the spot in the table without a doubt.</p>
+</section>
+<section id="xthreat" class="level4">
+<h4 class="anchored" data-anchor-id="xthreat">xThreat</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The most dominant player in attacking passes is clearly Veerman, who really dominates the attacking midfield with his passes. It’s fun to see that on the left side Van Aanholt creates a lot as a back, but on the right side, the most threat is coming from attackers and midfielders. This could be due to some injuries or rotation, but even the per 90 names look almost the same.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="the-players" class="level3">
+<h3 class="anchored" data-anchor-id="the-players">The Players</h3>
+<p>Honestly, I could dive into the data for so many players of this team. To avoid the risk of overkill, I only chose a few to review. If you want to see some data from other players, feel free to contact me on <a href="https://twitter.com/robinwilhelmus" target="_blank">Twitter</a>.</p>
+<section id="benitez" class="level4">
+<h4 class="anchored" data-anchor-id="benitez">Benitez</h4>
+<p>Let’s begin in the back: Benitez. He only conceded 6 goals from 14.74 xG. Most of you know, that this stat doesn’t say much about Benitez’ qualities. If the opposite players shot all their chances out of the stadium, the xG would still be the same. Lukily we have <a href="https://theanalyst.com/eu/2021/06/what-are-expected-goals-on-target-xgot/" target="_blank">PsxG/xGOT</a> to qualify the shots instead of the chances.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Opta gives PSV’s opposition a PSxG of 9.6. So yeah, they do finish their chances sub par. But even then, Benitez is preventing 3.6 goals. That’s a lot from 9.6 PSxG. In other words: he’s preventing 37.5% of PSV’s goals against. In absolute numbers, only Barkas and Olij match him with 3.6 and 3.5 goals prevented, but that’s from 26.6 and 25.5 PSxG. So yeah, PSV is maybe lucky with the finishing abilities of the teams they faced, but on top of that, Benitez is having a great season.</p>
+</section>
+<section id="luuk-de-jong" class="level4">
+<h4 class="anchored" data-anchor-id="luuk-de-jong">Luuk de Jong</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>PSV is finishing their 51.14 xG with 46.6 PSxG, so not that deadly. Their joint top goalscorer is Luuk de Jong with “only” eleven goals of which four were penalties. Those are not the numbers you would expect from the striker of a team that scored 56 goals already. Pavlidis and Gimenez are on 18 and their teams “only” scored 35 en 48 goals. But that’s probably the strength of this PSV, a lot of players know how to score a goal. And of course De Jong brings more than just goals to this team (he has 7 assists), but his lack of goals is something that stands out for me.</p>
+</section>
+<section id="joey-veerman" class="level4">
+<h4 class="anchored" data-anchor-id="joey-veerman">Joey Veerman</h4>
+<p>By far their most dangerous passer of the team is Veermanas we saw earlier. With his open play passes he created an xThreat of 3.64. Only Sugaware does this better with 4.38 in about the same minutes.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Besides that he assisted 72 shots, by far the most of the whole league.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Just to show that those passes were not only to a player that loves to shoot from far, here is the top 10 xA and their assists this season.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As you can see, he creates a lot. You can also see another PSV player: Bakayoko. A player a lot of people were happy to let him go to PSG for peanuts, but he proves them wrong with a great season.</p>
+<p>As I said, I could highlight almost every player. From a lot of players (e.g.&nbsp;Lang, Schouten, Lozano) we/I knew their quality, but Saibari really surprises me this season. <img src="https://www.gettingbluefingers.com/posts/2023-23-12_PSV/saibari.png" class="img-fluid"> His numbers are great and he is a joy to watch. He seems to get fitter and better every week I watch him.</p>
+</section>
+</section>
+</section>
+<section id="well-how-insane-is-psv" class="level2">
+<h2 class="anchored" data-anchor-id="well-how-insane-is-psv">Well, how insane is PSV?</h2>
+<p>Very. They dominate most stats and they are playing great attacking football, with a squad that is way bigger and better than just te first eleven. After a difficult season it is admirable what Peter Bosz achieved in a short time. They were a team that was depending on Xavi’s brilliant actions, but are now a team where everyone knows their role and knows how to execute it.</p>
 
-<p>This is the first post in a Quarto blog. Welcome!</p>
-<p><img src="https://www.gettingbluefingers.com/posts/welcome/thumbnail.jpg" class="img-fluid"></p>
-<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
+
+</section>
+
+ ]]></description>
+  <guid>https://www.gettingbluefingers.com/posts/2023-23-12_PSV/index.html</guid>
+  <pubDate>Fri, 22 Dec 2023 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Expected Points</title>
+  <link>https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<hr>
+<p><img src="https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/img/0.png" class="img-fluid" width="750"></p>
+<p><br> <br> This post is about Expected Points</p>
+<p>Read the Dutch version of this article <a href="https://www.tussendelinies.nl/expected-points/">here</a></p>
+<p>You probably read already about it, or saw it in some tweet/picture/anything, Expected Points. From understat to Opta, they are all using it. There are some different ways to calculate it though. In this article I will tell you my method, the method we use for our dashboard at <a href="https://www.tussendelinies.nl/data-dashboard">Tussen de Linies</a></p>
+<p><br> #### XPOINTS? What can we do with xPoints and do we need it?<br>
+We can use xPoints to see where we may expect a team in the league table. In short: it is a way to show how well they perform this season, looking at their shots.<br>
+Raw xG numbers don’t say everything, as the quality of the chances plays a role as well.</p>
+<section id="an-example" class="level4">
+<h4 class="anchored" data-anchor-id="an-example">AN EXAMPLE</h4>
+<p>Let’s take a look at the game FC Groningen against FC Twente. The game ended in 2-2 with xG 1.9 and 1.5. In the table you’ll see the chances for both teams to win.</p>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/img/1.png"></p>
+</div>
+<p>As you can see, the xG of Groningen is 0.5 higher (almost 36%), but the chance to win is 86% percent higher. The size of the chances is what decides the difference.</p>
+<p><br></p>
+<section id="how-big-are-the-chances" class="level5">
+<h5 class="anchored" data-anchor-id="how-big-are-the-chances">HOW BIG ARE THE CHANCES?</h5>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/img/2.jpg"></p>
+</div>
+<p>Besides the two goals, Groningen has a lot of medium sized chances. Twente has three good chances, but not much else. For getting the chance to win and so the expected points, we will simulate those chances. <br></p>
+</section>
+</section>
+<section id="the-calculation" class="level4">
+<h4 class="anchored" data-anchor-id="the-calculation">THE CALCULATION</h4>
+<p>For every shot we draw a random number between 0 and 1. Everytime this number is smaller than the xG of that shot, the shot becomes a goal. After we’ve done this for every shot in the match, we got a number of home- and away goals and so a result (home win/draw/away win). We simulate a match this way for ten thousand times. Each result is stored and after all the simulations we count the number of different results to determine the chance for both teams to win. It’s simple the perentage of simulations resulting in that specific result.</p>
+<p>After we have those chances, we multiply the chance to win with 3 and the chance for a draw with 1 for both teams. So: Groningen 49.04% * 3 punten + 24.72% * 1 punt = 1.72</p>
+<p>Those calculations will give us a number of points that we call Expected Points. Doing this for a whole season will give us an Expected Rank. In this match, Groningen didn’t got enough with there 1 real point, but over the whole season they got too many points.</p>
+<p><br></p>
+</section>
+<section id="the-problems" class="level4">
+<h4 class="anchored" data-anchor-id="the-problems">THE PROBLEM(S)</h4>
+<p>Game state is very much resposible for the way a team acts. If you’re leading by an early goal, the urge to attack fades away. The opponent will attack instead and will get a higher xG with every shot they take. If they don’t score, they keep attacking without scoring. So the xG skews in their favour, even if their chances are poor. Scoring 2 or 3 goals from less than 1 xG in the beginning of the game will also have this result, as the opponent must attack and have a comfortable lead.</p>
+<p>The experience learns us that over a whole season, xPoints is good in giving us a fair picture about the teams in a competition.</p>
+</section>
+<section id="how-does-x-perform-over-time" class="level4">
+<h4 class="anchored" data-anchor-id="how-does-x-perform-over-time">HOW DOES X PERFORM OVER TIME?</h4>
+<p>If you want to see a xPoints timeline of you’re favorite Eredivisie team, hit me up on <a href="https://www.twitter.com/RobinWilhelmus">Twitter!</a></p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://www.gettingbluefingers.com/posts/2021-03-03_Expected-points/index.html</guid>
+  <pubDate>Tue, 02 Mar 2021 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Extraordinary Giakoumakis</title>
+  <link>https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><img src="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/0.jpg" class="img-fluid"></p>
+<p><br>Giakoumakis stays with VVV for at least the rest of the season. He scored 21 goals (6 penalties) already this season. Is he really that good? Let’s find out if a bigger club should go after him this summer. <br> He had 15 non penalty goals. His shot map looks great. Very few shots from outside the penalty box and a lot of central shots. His NPxG is 8.46, which already shows his overperformance.<br>
+</p>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/1.jpg" class="img-fluid" width="750"></p>
+</div>
+<p><br> Let’s take a closer look at the xG of his chances. I divided his chances in 0.1 xG bins. We see that most of his chances are really small (&lt; 0.1 xG), but he scores relative many of those chances(4 from 36). The same goes for the 0.1-0.2 bin where he scored 4 from 12. What can we do with xPoints and do we need it?<br>
+</p>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/2.jpg" class="img-fluid" width="750"></p>
+</div>
+<p><br> So, how extraordinary is this? I’ve simulated all his non penalty shots a million times to see how much he would score. As we can see, the chance that he scores 15 of them is only a few percent! Scoring only 3 goals is more likely than the 15 he has!<br>
+</p>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/3.jpg" class="img-fluid" width="750"></p>
+</div>
+<p><br> If we look at the minimum number of goals scored in the simulations, we see that he has an almost 50% chance of scoring at least 9 goals. The chance at scoring 11 or more goals is less than 25%<br>
+</p>
+<div style="text-align:center">
+<p><img src="https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/img/4.jpg" class="img-fluid" width="750"></p>
+</div>
+<p>Will he continue this form the rest of the season? Possible, but unlikely. Will he manage this next season as well? Even more unlikely.</p>
+<p>VVV should’ve sold him already in my opinion as they are safe from relegation. Now they should certainly sell him at the end of the season.</p>
 
 
 
  ]]></description>
-  <category>news</category>
-  <guid>https://www.gettingbluefingers.com/posts/welcome/index.html</guid>
-  <pubDate>Sat, 24 Sep 2022 22:00:00 GMT</pubDate>
-  <media:content url="https://www.gettingbluefingers.com/posts/welcome/thumbnail.jpg" medium="image" type="image/jpeg"/>
+  <guid>https://www.gettingbluefingers.com/posts/2021-02-04_Giakoumakis/index.html</guid>
+  <pubDate>Wed, 03 Feb 2021 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
